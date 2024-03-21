@@ -7,8 +7,8 @@ import CoursesCard from "./CoursesCard";
 const Dashboard = () => {
   const coursesList = [
     {
-      title: "Foundations of Web Development",
-      subtitle: "Comprehensive Introduction to HTML & CSS",
+      title: "Basics of Web Development",
+      subtitle: "Basics Introduction to HTML & CSS",
     },
     {
       title: "Mastering HTML5 Markup",
@@ -19,7 +19,7 @@ const Dashboard = () => {
       subtitle: "Fundamental Principles and Best Practices",
     },
     {
-      title: "Responsive Web Design Fundamentals",
+      title: "Responsive Web Designing",
       subtitle: "Optimizing Layouts for All Devices with CSS3",
     },
     {
@@ -32,7 +32,7 @@ const Dashboard = () => {
     },
     {
       title: "Frontend Development Bootcamp",
-      subtitle: "Mastering HTML, CSS, and JavaScript for Professional Websites",
+      subtitle: "Mastering HTML, CSS, and JavaScript",
     },
     {
       title: "CSS Grid Layout Mastery",
