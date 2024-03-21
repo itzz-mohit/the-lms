@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
-import Banner from "./Banner";
-import { SmallCard } from "./SmallCard";
-import CoursesCard from "./CoursesCard";
+import Banner from "../Banners/Banner";
+import { SmallCard } from "../Cards/SmallCard";
+import CoursesCard from "../Cards/CoursesCard";
+import Footer from "../Footer/Footer";
 
 const Dashboard = () => {
   const coursesList = [
@@ -87,7 +88,7 @@ const Dashboard = () => {
 
   return (
     <div className="mx-8">
-      <Header />
+      
       <Banner onSearch={handleSearch} />
       <div className="flex flex-wrap">
         <SmallCard />
@@ -99,6 +100,7 @@ const Dashboard = () => {
           <CoursesCard key={index} value={course} />
         ))}
       </div>
+      
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Banner = ({ onSearch }) => {
   };
 
   return (
-    <div className="py-8 px-4 mt-24">
+    <div className="py-8 px-2 mt-24">
       <div className="mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center"> {/* Added flex-col and md:flex-row */}
           <div className="text-3xl font-semibold text-gray-800">Dashboard</div>
@@ -36,7 +36,7 @@ const Banner = ({ onSearch }) => {
             </svg>
           </div>
         </div>
-        <div className="text-2xl font-semibold text-gray-800 mt-4">
+        <div className="text-2xl  font-semibold text-gray-800 mt-7 ">
           Explore our Courses
         </div>
       </div>
