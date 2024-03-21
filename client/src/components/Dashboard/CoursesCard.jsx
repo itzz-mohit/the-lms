@@ -13,7 +13,7 @@ const CoursesCards = ({ value }) => {
   };
 
   return (
-    <div className="w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden">
+    <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden">
       <img
         src="https://lms.kochiva.com/assets/images/LMS.png"
         alt="Laptop"
