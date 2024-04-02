@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CoursesCards = ({ value }) => {
   const [isFilled, setIsFilled] = useState(false);
@@ -14,11 +15,13 @@ const CoursesCards = ({ value }) => {
 
   return (
     <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden">
-      <img
-        src="https://lms.kochiva.com/assets/images/LMS.png"
-        alt="Laptop"
-        className="h-[200px] w-full rounded-t-md object-cover"
-      />
+      <Link to="/content">
+        <img
+          src="https://lms.kochiva.com/assets/images/LMS.png"
+          alt="Laptop"
+          className="h-[200px] w-full rounded-t-md object-cover"
+        />
+      </Link>
       <div className="p-5 rounded-full bg-white absolute top-2 right-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,14 +51,14 @@ const CoursesCards = ({ value }) => {
         <div className="flex items-center mt-3">
           {[...Array(5)].map((_, index) => (
             <svg
-              key={index} 
+              key={index}
               xmlns="http://www.w3.org/2000/svg"
-              fill={index < rating ? "orange" : "none"} 
+              fill={index < rating ? "orange" : "none"}
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="orange"
               className="w-5 h-5 cursor-pointer"
-              onClick={() => handleStarClick(index)} 
+              onClick={() => handleStarClick(index)}
             >
               <path
                 strokeLinecap="round"

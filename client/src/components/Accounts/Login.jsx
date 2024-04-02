@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [toggle, setToggle] = useState(true);
+  const navigate = useNavigate();
+
+  const handleNavigate = () =>{
+    navigate('/mainpage')
+  }
   return (
     <section className="mt-14">
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -65,18 +71,17 @@ const Login = () => {
                 {toggle
                   ? " Don&apos;t have an account?"
                   : "Already have an account?"}
-                <a
-                  href="#"
-                  title=""
+                <span
                   onClick={() => setToggle(!toggle)}
-                  className="font-semibold text-black transition-all duration-200 hover:underline"
+                  className="font-semibold text-black transition-all duration-200 hover:underline ms-1 cursor-pointer"
                 >
                   {toggle ? "Create a free account" : "Sign In"}
-                </a>
+                </span>
               </p>
               <div>
                 <button
                   type="button"
+                  onClick={handleNavigate}
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
                   {toggle ? "Get started" : "Register"}

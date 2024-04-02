@@ -10,9 +10,9 @@ const Banner = ({ onSearch }) => {
   return (
     <div className="py-8 px-2 mt-24">
       <div className="mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center"> {/* Added flex-col and md:flex-row */}
+        <div className="flex flex-col md:flex-row justify-between items-center"> 
           <div className="text-3xl font-semibold text-gray-800">Dashboard</div>
-          <div id="hello" className="ml-4 relative mt-4 md:mt-0 "> {/* Added mt-4 and md:mt-0 */}
+          <div id="hello" className="ml-4 relative mt-4 md:mt-0 "> 
             <input
               className="px-4 py-2 rounded-lg bg-white border border-gray-300 focus:outline-none focus:border-gray-500"
               placeholder="Search courses"

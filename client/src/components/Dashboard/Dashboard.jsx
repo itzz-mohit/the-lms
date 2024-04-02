@@ -4,6 +4,7 @@ import Banner from "../Banners/Banner";
 import { SmallCard } from "../Cards/SmallCard";
 import CoursesCard from "../Cards/CoursesCard";
 import Footer from "../Footer/Footer";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const coursesList = [
@@ -88,13 +89,13 @@ const Dashboard = () => {
 
   return (
     <div className="mx-8">
-      
       <Banner onSearch={handleSearch} />
       <div className="flex flex-wrap">
         <SmallCard />
         <SmallCard />
       </div>
       <div className="text-2xl text-gray-400 ms-4 mt-7">Active Courses</div>
+      
       <div className="flex flex-wrap ">
         {filteredCourses.map((course, index) => (
           <CoursesCard key={index} value={course} />
