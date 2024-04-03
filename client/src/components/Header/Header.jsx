@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import info from "../../assets/info.png";
 import lms from "../../assets/lms.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -58,42 +59,24 @@ const Header = () => {
             </div>
             {dropdownOpen && (
               <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
-                <a
-                  href="#"
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
-                >
+                <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   Username
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
-                >
+                </Link>
+                <Link to="/mainpage" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   Home
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
-                >
+                </Link>
+                <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   My Learning
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
-                >
+                </Link>
+                <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   My Submissions
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
-                >
+                </Link>
+                <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   Favorite Courses
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
-                >
+                </Link>
+                <Link to="/" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   Logout
-                </a>
+                </Link>
               </div>
             )}
           </div>

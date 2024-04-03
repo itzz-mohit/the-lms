@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Welcome from "../Banners/Welcome";
 import HtmlPdf from "../PdfRenders/HtmlPdf";
+import { useSearchParams } from "react-router-dom";
 
 const Content = () => {
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get("id");
+
   const [toggleOne, setToggleOne] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
   const [showHtmlPdf, setShowHtmlPdf] = useState(false);
@@ -122,9 +126,7 @@ const Content = () => {
               />
             </svg>
           </div>
-          <div className="font-semibold text-white text-xl">
-            Html/CSS Certifications
-          </div>
+          <div className="font-semibold text-white text-xl">{name}</div>
         </div>
         <div>{showHtmlPdf ? <HtmlPdf /> : <Welcome />}</div>
       </div>

@@ -15,7 +15,7 @@ const CoursesCards = ({ value }) => {
 
   return (
     <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden">
-      <Link to="/content">
+      <Link to={"/content?id=" + value.title}>
         <img
           src="https://lms.kochiva.com/assets/images/LMS.png"
           alt="Laptop"

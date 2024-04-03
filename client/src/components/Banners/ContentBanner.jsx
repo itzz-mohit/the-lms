@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import useSound from 'use-sound';
 import clickSound from '../../assets/sounds/mouse-click.mp3';
 
 
 const ContentBanner = () => {
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get("id");
 
   const [play] = useSound(clickSound, { volume: 3.0 });
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +27,7 @@ const ContentBanner = () => {
     <div className="flex justify-between items-center mx-8 mt-28">
       <div className="flex items-center">
         <div>
-          <h1 className="text-lg font-semibold text-gray-800">HTML and CSS Certifications</h1>
+          <h1 className="text-lg font-semibold text-gray-800">{name}</h1>
         </div>
         <div className="relative inline-block text-left ml-4">
           <div>

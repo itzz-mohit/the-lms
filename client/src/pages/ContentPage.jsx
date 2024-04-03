@@ -8,7 +8,7 @@ const ContentPage = () => {
       <ContentBanner />
       <Content />
     </div>
-  );
+  ); 
 };
 
 export default ContentPage;
