@@ -69,7 +69,7 @@ const Login = () => {
               </div>
               <p className="mt-2  text-sm text-gray-600 ">
                 {toggle
-                  ? " Don&apos;t have an account?"
+                  ? " Don't have an account?"
                   : "Already have an account?"}
                 <span
                   onClick={() => setToggle(!toggle)}

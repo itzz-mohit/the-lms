@@ -7,6 +7,7 @@ import MainPage from "./pages/MainPage.jsx";
 import { Content } from "./components/index.js";
 import ContentBanner from "./components/Banners/ContentBanner.jsx";
 import ContentPage from "./pages/ContentPage.jsx";
+import Quiz from "./components/Quiz/Quiz.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/content",
     element: <ContentPage />,
+  },
+  {
+    path: "/quiz",
+    element: <Quiz />,
   },
 ]);
 

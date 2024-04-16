@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Welcome from "../Banners/Welcome";
 import HtmlPdf from "../PdfRenders/HtmlPdf";
 import { useSearchParams } from "react-router-dom";
+import Docs from "../Docs/Docs";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
@@ -10,7 +11,25 @@ const Content = () => {
   const [toggleOne, setToggleOne] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
   const [showHtmlPdf, setShowHtmlPdf] = useState(false);
+  const [showDocs, setShowDocs] = useState(false);
   const [screen, setScreen] = useState(true);
+  const [quiz, setQuiz] = useState(false);
+
+  const handleShowHtmlPdf = () => {
+    setShowHtmlPdf(true);
+    setShowDocs(false);
+  };
+
+  const handleShowDocs = () => {
+    setShowHtmlPdf(false);
+    setShowDocs(true);
+  };
+
+  const handleQuiz = () => {
+    setShowHtmlPdf(false);
+    setShowDocs(false);
+    setQuiz(true);
+  };
 
   return (
     <div className="flex mx-8 mt-8 gap-6">
@@ -35,7 +54,7 @@ const Content = () => {
             </div>
             <div className="font-semibold text-white">Course Content</div>
           </div>
-          <div className="p-1 bg-white shadow-lg h-screen">
+          <div className="p-1 bg-white shadow-lg h-full">
             <div className="py-1 px-1 ">
               <div
                 className="flex justify-between bg-gray-300 py-2 px-2 cursor-pointer"
@@ -62,11 +81,14 @@ const Content = () => {
                 <div className="cursor-pointer text-xs from-neutral-600 ">
                   <div
                     className="bg-gray-50 py-3 px-2  hover:bg-gray-200 border-b border-gray-300"
-                    onClick={() => setShowHtmlPdf(true)}
+                    onClick={handleShowHtmlPdf}
                   >
                     Html Introduction
                   </div>
-                  <div className="bg-gray-50 py-3 px-2 hover:bg-gray-200">
+                  <div
+                    className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
+                    onClick={handleShowDocs}
+                  >
                     CSS Introduction
                   </div>
                 </div>
@@ -96,8 +118,11 @@ const Content = () => {
               </div>
               {toggleTwo && (
                 <div className="cursor-pointer text-xs from-neutral-600 ">
-                  <div className="bg-gray-50 py-3 px-2  hover:bg-gray-200 border-b border-gray-300">
-                    Html Notes
+                  <div
+                    className="bg-gray-50 py-3 px-2  hover:bg-gray-200 border-b border-gray-300"
+                    onClick={handleQuiz}
+                  >
+                    Quiz
                   </div>
                   <div className="bg-gray-50 py-3 px-2 hover:bg-gray-200">
                     CSS Notes
@@ -128,7 +153,9 @@ const Content = () => {
           </div>
           <div className="font-semibold text-white text-xl">{name}</div>
         </div>
-        <div>{showHtmlPdf ? <HtmlPdf /> : <Welcome />}</div>
+        <div>
+          {showHtmlPdf ? <HtmlPdf /> : showDocs ? <Docs /> : <Welcome />}
+        </div>
       </div>
     </div>
   );
