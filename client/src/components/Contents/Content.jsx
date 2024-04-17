@@ -3,6 +3,8 @@ import Welcome from "../Banners/Welcome";
 import HtmlPdf from "../PdfRenders/HtmlPdf";
 import { useSearchParams } from "react-router-dom";
 import Docs from "../Docs/Docs";
+import Quiz from "../Quiz/Quiz";
+import HtmlVideo from "../CourseVideo/HtmlVideo";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
@@ -14,21 +16,32 @@ const Content = () => {
   const [showDocs, setShowDocs] = useState(false);
   const [screen, setScreen] = useState(true);
   const [quiz, setQuiz] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   const handleShowHtmlPdf = () => {
     setShowHtmlPdf(true);
     setShowDocs(false);
+    setShowVideo(false);
   };
 
   const handleShowDocs = () => {
     setShowHtmlPdf(false);
     setShowDocs(true);
+    setShowVideo(false);
   };
 
   const handleQuiz = () => {
     setShowHtmlPdf(false);
     setShowDocs(false);
     setQuiz(true);
+    setShowVideo(false);
+  };
+
+  const handleVideo = () => {
+    setShowHtmlPdf(false);
+    setShowDocs(false);
+    setQuiz(false);
+    setShowVideo(true);
   };
 
   return (
@@ -124,8 +137,11 @@ const Content = () => {
                   >
                     Quiz
                   </div>
-                  <div className="bg-gray-50 py-3 px-2 hover:bg-gray-200">
-                    CSS Notes
+                  <div
+                    className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
+                    onClick={handleVideo}
+                  >
+                    Videos
                   </div>
                 </div>
               )}
@@ -154,7 +170,17 @@ const Content = () => {
           <div className="font-semibold text-white text-xl">{name}</div>
         </div>
         <div>
-          {showHtmlPdf ? <HtmlPdf /> : showDocs ? <Docs /> : <Welcome />}
+          {showHtmlPdf ? (
+            <HtmlPdf />
+          ) : showDocs ? (
+            <Docs />
+          ) : quiz ? (
+            <Quiz />
+          ) : showVideo ? (
+            <HtmlVideo />
+          ) : (
+            <Welcome />
+          )}
         </div>
       </div>
     </div>
