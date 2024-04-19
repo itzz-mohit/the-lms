@@ -5,6 +5,9 @@ import { useSearchParams } from "react-router-dom";
 import Docs from "../Docs/Docs";
 import Quiz from "../Quiz/Quiz";
 import HtmlVideo from "../CourseVideo/HtmlVideo";
+import QuizBanner from "../Banners/QuizBanner";
+import FeedbackForm from "../Forms/FeedbackForm";
+import HtmlAssignments from "../Assignments/HtmlAssignments";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
@@ -12,11 +15,31 @@ const Content = () => {
 
   const [toggleOne, setToggleOne] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
+  const [toggleThree, setToggleThree] = useState(false);
+
   const [showHtmlPdf, setShowHtmlPdf] = useState(false);
   const [showDocs, setShowDocs] = useState(false);
   const [screen, setScreen] = useState(true);
   const [quiz, setQuiz] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showAssignments, setshowAssignments] = useState(false);
+
+  const handleToggleOne = () => {
+    setToggleOne(!toggleOne);
+    setToggleTwo(false);
+    setToggleThree(false);
+  };
+  const handleToggleTwo = () => {
+    setToggleOne(false);
+    setToggleTwo(!toggleTwo);
+    setToggleThree(false);
+  };
+  const handleToggleThree = () => {
+    setToggleOne(false);
+    setToggleTwo(false);
+    setToggleThree(!toggleThree);
+  };
 
   const handleShowHtmlPdf = () => {
     setShowHtmlPdf(true);
@@ -42,6 +65,23 @@ const Content = () => {
     setShowDocs(false);
     setQuiz(false);
     setShowVideo(true);
+  };
+
+  const handleFeedback = () => {
+    setShowHtmlPdf(false);
+    setShowDocs(false);
+    setQuiz(false);
+    setShowVideo(false);
+    setShowFeedback(true);
+  };
+
+  const handleAssignments = () => {
+    setShowHtmlPdf(false);
+    setShowDocs(false);
+    setQuiz(false);
+    setShowVideo(false);
+    setShowFeedback(false);
+    setshowAssignments(true);
   };
 
   return (
@@ -71,7 +111,7 @@ const Content = () => {
             <div className="py-1 px-1 ">
               <div
                 className="flex justify-between bg-gray-300 py-2 px-2 cursor-pointer"
-                onClick={() => setToggleOne(!toggleOne)}
+                onClick={() => setToggleOne(handleToggleOne)}
               >
                 <div>Module 1</div>
                 <svg
@@ -110,7 +150,7 @@ const Content = () => {
             <div className="py-1 px-1 ">
               <div
                 className="flex justify-between bg-gray-300 py-2 px-2 cursor-pointer"
-                onClick={() => setToggleTwo(!toggleTwo)}
+                onClick={() => setToggleTwo(handleToggleTwo)}
               >
                 <div>Module 2</div>
                 <svg
@@ -138,11 +178,56 @@ const Content = () => {
                     Quiz
                   </div>
                   <div
-                    className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
+                    className="bg-gray-50 py-3 px-2 hover:bg-gray-200 border-b border-gray-300"
                     onClick={handleVideo}
                   >
                     Videos
                   </div>
+                  <div
+                    className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
+                    onClick={handleAssignments}
+                  >
+                    Assignments
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="py-1 px-1 ">
+              <div
+                className="flex justify-between bg-gray-300 py-2 px-2 cursor-pointer"
+                onClick={() => setToggleThree(handleToggleThree)}
+              >
+                <div>Module 3</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  style={{ transform: `rotate(${toggleTwo ? 180 : 0}deg)` }}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </div>
+              {toggleThree && (
+                <div className="cursor-pointer text-xs from-neutral-600 ">
+                  <div
+                    className="bg-gray-50 py-3 px-2  hover:bg-gray-200 border-b border-gray-300"
+                    onClick={handleFeedback}
+                  >
+                    Feedback
+                  </div>
+                  {/* <div
+                    className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
+                    onClick={handleVideo}
+                  >
+                    Videos
+                  </div> */}
                 </div>
               )}
             </div>
@@ -175,9 +260,13 @@ const Content = () => {
           ) : showDocs ? (
             <Docs />
           ) : quiz ? (
-            <Quiz />
+            <QuizBanner />
           ) : showVideo ? (
             <HtmlVideo />
+          ) : showFeedback ? (
+            <FeedbackForm />
+          ) : showAssignments ? (
+            <HtmlAssignments />
           ) : (
             <Welcome />
           )}

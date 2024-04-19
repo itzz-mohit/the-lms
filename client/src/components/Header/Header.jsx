@@ -59,11 +59,17 @@ const Header = () => {
             </div>
             {dropdownOpen && (
               <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
-                <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
-                  Username
-                </Link>
-                <Link to="/mainpage" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
+                <Link
+                  to="/mainpage"
+                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
+                >
                   Home
+                </Link>
+                <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
+                  Profile
+                </Link>
+                <Link to='/about' className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
+                 About Us
                 </Link>
                 <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   My Learning
@@ -74,7 +80,13 @@ const Header = () => {
                 <Link className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
                   Favorite Courses
                 </Link>
-                <Link to="/" className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
+                <Link to='/contact' className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300">
+                  Help Desk
+                </Link>
+                <Link
+                  to="/"
+                  className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
+                >
                   Logout
                 </Link>
               </div>
