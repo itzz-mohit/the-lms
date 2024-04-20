@@ -235,7 +235,7 @@ const Content = () => {
         </div>
       )}
       <div className={screen ? "w-5/6" : "w-full"}>
-        <div className="flex py-2 px-2 bg-sky-600">
+        <div className="flex py-2 px-2 bg-cyan-800">
           <div className="me-2" onClick={() => setScreen(!screen)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

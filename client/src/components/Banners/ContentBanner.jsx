@@ -93,14 +93,14 @@ const ContentBanner = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={3.5}
                 stroke="currentColor"
-                className="w-6 h-8 me-1 pe-1 text-sky-600 font-bold"
+                className="w-6 h-8 me-1 pe-1 text-cyan-800 font-semibold"
                 onClick={()=>play()}
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
               </svg>
             </Link>
           </div>
-          <div className="text-xl text-sky-600"> back</div>
+          <div className="text-xl text-cyan-800"> back</div>
         </div>
       </div>
     </div>

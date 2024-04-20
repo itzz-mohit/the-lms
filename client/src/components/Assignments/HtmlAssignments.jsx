@@ -50,7 +50,7 @@ export default function HtmlAssignments() {
       <div className="flex items-end justify-end p-4">
         <button
           onClick={log}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg hover:shadow transition duration-150 ease-in-out"
+          className="bg-cyan-800 hover:bg-cyan-900 text-white font-semibold py-2 px-4 rounded shadow-lg hover:shadow transition duration-150 ease-in-out"
         >
           Submit
         </button>

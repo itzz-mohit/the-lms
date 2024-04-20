@@ -5,7 +5,7 @@ const ContactUs = () => {
     <div className="mt-12">
       <section className="bg-white">
         <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900">
+          <h2 className="mb-4 text-4xl tracking-tight font-bold text-center text-cyan-800">
             Contact Us
           </h2>
           <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 sm:text-xl">
@@ -59,7 +59,7 @@ const ContactUs = () => {
             </div>
             <button
               type="submit"
-              className="py-3 px-5 text-sm font-medium text-center text-white bg-sky-600 rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300"
+              className="py-3 px-5 text-sm font-medium text-center text-white bg-cyan-800 rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300"
             >
               Send message
             </button>

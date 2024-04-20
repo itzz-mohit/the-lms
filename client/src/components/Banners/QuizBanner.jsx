@@ -23,7 +23,7 @@ const QuizBanner = () => {
           <div className="mt-4">
             <div className="mr-2 text-gray-600 mb-4">Attempts Left: 1</div>
             <div className="flex" onClick={handleQuiz}>
-              <button className="px-4 py-2 border border-blue-700 text-blue-700  rounded shadow hover:bg-blue-700 hover:text-white">
+              <button className="px-4 py-2 border border-cyan-800 text-cyan-800  rounded shadow hover:bg-cyan-800 hover:text-white">
                 Start
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

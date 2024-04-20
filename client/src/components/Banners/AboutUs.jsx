@@ -18,7 +18,7 @@ const AboutUs = () => {
               About us
             </span> */}
             <h2 class="my-4 font-bold text-3xl  sm:text-4xl ">
-              About <span class="text-blue-600">Our Website</span>
+              About <span class="text-cyan-800">Our Website</span>
             </h2>
             <p class="text-gray-700 text-justify">
               Welcome to LMS, a pioneering Learning Management System dedicated
