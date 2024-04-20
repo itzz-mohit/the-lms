@@ -1,6 +1,6 @@
 import React from 'react'
 import { Footer, Header } from '../components'
-import ContactUs from '../components/Banners/ContactUs'
+import ContactUs from '../components/Forms/ContactUs'
 
 const ContactUsPage = () => {
   return (

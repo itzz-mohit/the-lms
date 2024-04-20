@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* In your Tailwind CSS stylesheet */
+.input-field {
+    @apply mt-1 text-sm text-gray-900 py-3 px-4 rounded-md border border-gray-300 focus:outline-none focus:border-black transition duration-300 ease-in-out;
+  }
+  
+  .input-field:hover {
+    @apply border-black;
+  }
+  

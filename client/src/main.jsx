@@ -11,6 +11,8 @@ import AllCoursesPage from "./pages/AllCoursesPage.jsx";
 import MyLearningPage from "./pages/MyLearningPage.jsx";
 import FavoriteCoursePage from "./pages/FavoriteCoursePage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
+import UserProfilePage from "./pages/UserProfilePage.jsx";
+import UpdateProfilePage from "./pages/UpdateProfilePage.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -19,7 +21,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <RegisterPage/>,
+    element: <RegisterPage />,
   },
   {
     path: "/mainpage",
@@ -48,6 +50,14 @@ const appRouter = createBrowserRouter([
   {
     path: "/favoritecourses",
     element: <FavoriteCoursePage />,
+  },
+  {
+    path: "/userprofile",
+    element: <UserProfilePage />,
+  },
+  {
+    path: "/updateprofile",
+    element: <UpdateProfilePage />,
   },
 ]);
 
