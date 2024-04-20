@@ -10,6 +10,7 @@ import ContactUsPage from "./pages/ContactUsPage.jsx";
 import AllCoursesPage from "./pages/AllCoursesPage.jsx";
 import MyLearningBanner from "./components/Banners/MyLearningBanner.jsx";
 import MyLearningPage from "./pages/MyLearningPage.jsx";
+import FavoriteCoursePage from "./pages/FavoriteCoursePage.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -38,7 +39,11 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/mylearning",
-    element: <MyLearningPage/>
+    element: <MyLearningPage />,
+  },
+  {
+    path: "/favoritecourses",
+    element: <FavoriteCoursePage />,
   },
 ]);
 
