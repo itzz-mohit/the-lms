@@ -8,14 +8,18 @@ import ContentPage from "./pages/ContentPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import ContactUsPage from "./pages/ContactUsPage.jsx";
 import AllCoursesPage from "./pages/AllCoursesPage.jsx";
-import MyLearningBanner from "./components/Banners/MyLearningBanner.jsx";
 import MyLearningPage from "./pages/MyLearningPage.jsx";
 import FavoriteCoursePage from "./pages/FavoriteCoursePage.jsx";
+import RegisterPage from "./pages/RegisterPage.jsx";
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage/>,
   },
   {
     path: "/mainpage",

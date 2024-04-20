@@ -31,7 +31,7 @@ const FeedbackForm = () => {
             class="h-32 w-full resize-none rounded border border-gray-300 bg-white py-1 px-3 text-base leading-6 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
           ></textarea>
         </div>
-        <button class="rounded border-0 bg-sky-600 py-2 px-6 text-lg text-white hover:bg-sky-700 focus:outline-none">
+        <button class="rounded border-0 bg-cyan-900 py-2 px-6 text-lg text-white hover:bg-cyan-900 focus:outline-none">
           Send
         </button>
         <p class="mt-3 text-xs text-gray-500">

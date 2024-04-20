@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate, Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [userData, setUserData] = useState("");
   const navigate = useNavigate();
   const {
@@ -12,25 +12,52 @@ const Login = () => {
     formState: { errors, isValid },
   } = useForm({ mode: "onTouched" });
 
-  const onDataSubmit = (data) => {
+  const onRegisterData = (data) => {
     console.log(data);
     if (isValid) {
       reset();
       setUserData(data);
-      navigate("/mainpage");
+      navigate("/");
     }
   };
-
   return (
     <section className="mt-14">
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
           <h2 className="text-center text-4xl font-bold leading-tight text-black">
-            Sign In
+            Sign Up
           </h2>
-
-          <form className="mt-8" onSubmit={handleSubmit(onDataSubmit)}>
+          <form className="mt-8" onSubmit={handleSubmit(onRegisterData)}>
             <div className="space-y-5">
+              <div>
+                <label
+                  htmlFor=""
+                  className="text-base font-medium text-gray-900"
+                >
+                  Username
+                </label>
+                <div className="mt-2">
+                  <input
+                    className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    type="text"
+                    placeholder="Username"
+                    {...register("username", {
+                      required: "Please fill your username.",
+                      pattern: {
+                        value: /^[a-z-]+$/,
+                        message:
+                          "Username can only contain lowercase letters and hyphens (-).",
+                      },
+                    })}
+                  ></input>
+                  {errors.username && (
+                    <p className="text-red-500 text-xs italic">
+                      {errors.username.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
               <div>
                 <label
                   htmlFor=""
@@ -44,7 +71,7 @@ const Login = () => {
                     type="email"
                     placeholder="Email"
                     {...register("email", {
-                      required: "Please enter your email.",
+                      required: "Please fill your email.",
                     })}
                   ></input>
                   {errors.email && (
@@ -69,7 +96,7 @@ const Login = () => {
                     type="password"
                     placeholder="Password"
                     {...register("password", {
-                      required: "Please enter your password.",
+                      required: "Please fill your password.",
                       pattern: {
                         value: /^(?=.*[!@#$%^&*])(?=.*\d)(?=.*[A-Z]).{8,10}$/,
                         message:
@@ -93,10 +120,10 @@ const Login = () => {
                 </div>
               </div>
               <p className="mt-2  text-sm text-gray-600 ">
-                Don't have an account?
-                <Link to="/register">
+                Already have an account?
+                <Link to="/">
                   <span className="font-semibold text-black transition-all duration-200 hover:underline ms-1 cursor-pointer">
-                    Create a free account
+                    Sign In
                   </span>
                 </Link>
               </p>
@@ -105,7 +132,7 @@ const Login = () => {
                   type="submit"
                   className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
-                  Get started
+                  Register
                 </button>
               </div>
             </div>
@@ -116,4 +143,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
