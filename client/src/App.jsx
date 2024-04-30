@@ -12,7 +12,7 @@ import {
   UpdateProfilePage,
   UserProfilePage,
 } from "./pages/index";
-
+import HtmlPPT from "./components/PPT/HtmlPPT";
 function App() {
   const appRouter = createBrowserRouter([
     {
@@ -58,6 +58,10 @@ function App() {
     {
       path: "/updateprofile",
       element: <UpdateProfilePage />,
+    },
+    {
+      path: "/ppt",
+      element: <HtmlPPT />,
     },
   ]);
   return <RouterProvider router={appRouter} />;

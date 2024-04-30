@@ -1,19 +1,17 @@
 import React from "react";
-import ppt from "../../assets/ppts/html.ppt";
 
 const HtmlPPT = () => {
   return (
     <div>
       <h1>Learn Python</h1>
       <iframe
-        title="Python Presentation"
-        src={ppt}
+        src="https://docs.google.com/presentation/d/12tsAca_EGdZUvR-fxG-aTuXyxlsibcN8/edit#slide=id.p1"
         width="100%"
         height="600px"
         id="myId"
-        className="myClassName"
-        style={{ display: "initial", position: "relative" }}
-        allowFullScreen
+        className="myClassname"
+        display="initial"
+        position="relative"
       ></iframe>
     </div>
   );
