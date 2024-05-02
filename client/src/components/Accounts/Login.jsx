@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { loginApi } from "../../services/api";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [userData, setUserData] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -12,12 +14,24 @@ const Login = () => {
     formState: { errors, isValid },
   } = useForm({ mode: "onTouched" });
 
-  const onDataSubmit = (data) => {
-    console.log(data);
+  const onDataSubmit = async (data) => {
     if (isValid) {
-      reset();
-      setUserData(data);
-      navigate("/mainpage");
+      try {
+        const response = await loginApi(data);
+        if (response.success) {
+          navigate("/mainpage");
+          console.log("Login Successful");
+          reset();
+        }
+      } catch (error) {
+        console.log("Error while logging user");
+        console.error(error);
+        if (error == "email") {
+          setEmailError("User does not exist.");
+        } else {
+          setPasswordError("Invalid password.");
+        }
+      }
     }
   };
 
@@ -43,6 +57,7 @@ const Login = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
+                    onFocus={() => setEmailError("")}
                     {...register("email", {
                       required: "Please enter your email.",
                     })}
@@ -51,6 +66,9 @@ const Login = () => {
                     <p className="text-red-500 text-xs italic">
                       {errors.email.message}
                     </p>
+                  )}
+                  {emailError && (
+                    <p className="text-red-500 text-xs italic">{emailError}</p>
                   )}
                 </div>
               </div>
@@ -68,6 +86,7 @@ const Login = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="password"
                     placeholder="Password"
+                    onFocus={() => setPasswordError("")}
                     {...register("password", {
                       required: "Please enter your password.",
                       pattern: {
@@ -88,6 +107,11 @@ const Login = () => {
                   {errors.password && (
                     <p className="text-red-500 text-xs italic">
                       {errors.password.message}
+                    </p>
+                  )}
+                  {passwordError && (
+                    <p className="text-red-500 text-xs italic">
+                      {passwordError}
                     </p>
                   )}
                 </div>

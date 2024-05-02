@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { registerApi } from "../../services/api";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
-  const [userData, setUserData] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -12,12 +14,26 @@ const Register = () => {
     formState: { errors, isValid },
   } = useForm({ mode: "onTouched" });
 
-  const onRegisterData = (data) => {
+  const onRegisterData = async (data) => {
     console.log(data);
+
     if (isValid) {
-      reset();
-      setUserData(data);
-      navigate("/");
+      try {
+        const response = await registerApi(data);
+        console.log("Registration successful");
+        if (response.success) {
+          navigate("/");
+          reset();
+        }
+      } catch (error) {
+        console.log("Error while registering user");
+        console.error(error);
+        if (error == "username") {
+          setUsernameError("Username already exists.");
+        } else {
+          setEmailError("Email already exists.");
+        }
+      }
     }
   };
   return (
@@ -41,6 +57,7 @@ const Register = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="text"
                     placeholder="Username"
+                    onFocus={() => setUsernameError("")}
                     {...register("username", {
                       required: "Please fill your username.",
                       pattern: {
@@ -53,6 +70,11 @@ const Register = () => {
                   {errors.username && (
                     <p className="text-red-500 text-xs italic">
                       {errors.username.message}
+                    </p>
+                  )}
+                  {usernameError && (
+                    <p className="text-red-500 text-xs italic">
+                      {usernameError}
                     </p>
                   )}
                 </div>
@@ -70,6 +92,7 @@ const Register = () => {
                     className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
+                    onFocus={() => setEmailError("")}
                     {...register("email", {
                       required: "Please fill your email.",
                     })}
@@ -78,6 +101,9 @@ const Register = () => {
                     <p className="text-red-500 text-xs italic">
                       {errors.email.message}
                     </p>
+                  )}
+                  {emailError && (
+                    <p className="text-red-500 text-xs italic">{emailError}</p>
                   )}
                 </div>
               </div>
