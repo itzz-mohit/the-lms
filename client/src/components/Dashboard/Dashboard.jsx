@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { coursesList } from "../../utils/course-data";
-import Header from "../Header/Header";
 import Banner from "../Banners/Banner";
 import { SmallCard } from "../Cards/SmallCard";
 import CoursesCard from "../Cards/CoursesCard";
-import Footer from "../Footer/Footer";
-import { Link } from "react-router-dom";
-
+import { courseCardApi } from "../../services/course-api";
 const Dashboard = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const [courses, setCourses] = useState(coursesList);
+  const [courses, setCourses] = useState([]);
+
+  const fetchCardData = async () => {
+    const response = await courseCardApi();
+    // console.log(response.data);
+    setCourses(response.data);
+    setFilteredCourses(response.data);
+  };
 
   useEffect(() => {
-    setFilteredCourses(courses);
+    fetchCardData();
   }, []);
 
   const handleSearch = (query) => {
@@ -22,7 +26,9 @@ const Dashboard = () => {
     setFilteredCourses(filtered);
   };
 
-  return (
+  return courses.length == 0 ? (
+    "Loading..."
+  ) : (
     <div className="mx-8">
       <Banner onSearch={handleSearch} />
       <div className="flex flex-wrap">

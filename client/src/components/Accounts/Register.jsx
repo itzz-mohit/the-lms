@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { registerApi } from "../../services/api";
+import { registerApi } from "../../services/auth-api";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { loginApi } from "../../services/api";
+import { loginApi } from "../../services/auth-api";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
