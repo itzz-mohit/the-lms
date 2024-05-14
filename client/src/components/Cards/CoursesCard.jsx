@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import CourseRating from "../RatingBar/CourseRating";
 import { favoriteCourse } from "../../services/course-api";
 
-const CoursesCards = ({ value, onUnlike }) => {
+const CoursesCards = ({ value }) => {
   const [isFilled, setIsFilled] = useState(value.favorite);
   const courseId = value._id;
   const totalRating = Number(value.rating);
@@ -11,18 +11,12 @@ const CoursesCards = ({ value, onUnlike }) => {
   const handleSvgClick = async () => {
     try {
       const response = await favoriteCourse(courseId);
+      // console.log(response);
+      // console.log(response.data);
       setIsFilled(response.data.favorite);
     } catch (error) {
-      console.log("Error while adding to favorite");
+      console.clg("Error while adding to favorite");
       console.error(error);
-    }
-  };
-
-  const handleSvgUnClick = async () => {
-    try {
-      await onUnlike(courseId);
-    } catch (error) {
-      console.error("Error while unliking course:", error);
     }
   };
 
@@ -43,7 +37,7 @@ const CoursesCards = ({ value, onUnlike }) => {
           strokeWidth={1.5}
           stroke="red"
           className="w-6 h-6 absolute top-2 right-2 cursor-pointer"
-          onClick={isFilled ? handleSvgUnClick : handleSvgClick}
+          onClick={handleSvgClick}
         >
           <path
             strokeLinecap="round"
@@ -62,7 +56,7 @@ const CoursesCards = ({ value, onUnlike }) => {
           {value.description}
         </p>
         <div className="flex items-center mt-3">
-          <CourseRating initialRating={totalRating} courseId={value._id} />
+          <CourseRating intialrating={totalRating} courseId={value._id} />
         </div>
       </div>
 

@@ -5,13 +5,13 @@ import { updateCourseRating } from "../../services/course-api";
 
 function CourseRating({ intialrating, courseId }) {
   const [rating, setRating] = useState(intialrating);
-  //console.log("My rating" + rating);
 
   const handleRatingChange = async (data) => {
     try {
       const response = await updateCourseRating(courseId, { rating: data });
       console.log(response);
       setRating(data);
+      //window.location.reload();
     } catch (error) {
       console.log(error);
       console.log("Failed to change the rating");
