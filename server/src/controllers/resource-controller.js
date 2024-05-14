@@ -1,7 +1,7 @@
 const resourceModel = require("../models/resource-model");
 const courseModel = require("../models/course-model");
 
-//ADD Resources
+//ADD RESOURCES
 
 exports.addResources = async (req, res) => {
   try {
@@ -37,7 +37,7 @@ exports.addResources = async (req, res) => {
   }
 };
 
-//GET PDF
+//GET RESOURCES
 
 exports.getResources = async (req, res) => {
   try {
@@ -64,7 +64,7 @@ exports.getResources = async (req, res) => {
   }
 };
 
-//UPDATE RESOURCE
+//UPDATE RESOURCES
 exports.updateResources = async (req, res) => {
   try {
     const { courseId } = req.params;
