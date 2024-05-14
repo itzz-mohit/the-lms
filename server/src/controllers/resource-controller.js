@@ -5,16 +5,16 @@ const courseModel = require("../models/course-model");
 
 exports.addResources = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { courseId } = req.params;
     const { pdf, ppt, video } = req.body;
-    const response = await courseModel.findById({ _id: id });
+    const response = await courseModel.findById({ _id: courseId });
 
     if (!response) {
       return res.status(400).json({ error: "Course not exists." });
     }
 
     const data = await resourceModel.create({
-      courseId: id,
+      courseId: courseId,
       pdf,
       ppt,
       video,
@@ -40,26 +40,27 @@ exports.addResources = async (req, res) => {
 //GET PDF
 
 exports.getResources = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const response = await resourceModel.findById({ courseId: id });
-    if (!response) {
-      return res.status(400).json({ error: "Course not exists." });
+    try {
+      const { courseId } = req.params;
+  
+      const response = await resourceModel.findOne({ courseId: courseId });
+      if (!response) {
+        return res.status(400).json({ error: "Course not exists." });
+      }
+      console.log(response);
+      res.status(200).json({
+        success: true,
+        data: response,
+        message: "Resource fetched successfully",
+      });
+    } catch (error) {
+      console.log("Error while getting resource ");
+      console.error(error);
+      res.status(500).json({
+        success: false,
+        error: error.message,
+        message: "Internal Server Error",
+      });
     }
-    console.log(response);
-    res.status(201).json({
-      success: true,
-      data: response,
-      message: "Resource added successfully",
-    });
-  } catch (error) {
-    console.log("Error while getting pdf ");
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      error: error.message,
-      message: "Internal Server Error",
-    });
-  }
-};
+  };
+  

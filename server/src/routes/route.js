@@ -27,7 +27,7 @@ router.put("/courses/:courseId/favorite", favoriteCourse);
 router.get("/courses/favorites", getFavoriteCourses);
 
 //resources Routes
-router.post("/admin/resources/:id", addResources);
-router.get("/resources/:id", getResources);
+router.post("/admin/resources/:courseId", addResources);
+router.get("/resources/:courseId", getResources);
 
 module.exports = router;
