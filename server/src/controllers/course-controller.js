@@ -90,7 +90,7 @@ exports.updateRating = async (req, res) => {
   }
 };
 
-//FAVORITE Course
+//ADD REMOVE FAVORITE Course
 exports.favoriteCourse = async (req, res) => {
   try {
     const { courseId } = req.params;

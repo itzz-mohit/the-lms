@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import info from "../../assets/info.png";
 import lms from "../../assets/lms.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -27,7 +27,9 @@ const Header = () => {
   return (
     <nav className="bg-white shadow-md fixed w-full z-20 top-0 left-0 border-b">
       <div className=" flex items-center justify-between mx-auto p-4">
-        <img src={lms} className="h-14" />
+        <Link to="/mainpage">
+          <img src={lms} className="h-14" />
+        </Link>
 
         <div className="flex items-center space-x-2  md:order-2">
           <div className="flex items-center space-x-2">
