@@ -40,27 +40,84 @@ exports.addResources = async (req, res) => {
 //GET PDF
 
 exports.getResources = async (req, res) => {
-    try {
-      const { courseId } = req.params;
-  
-      const response = await resourceModel.findOne({ courseId: courseId });
-      if (!response) {
-        return res.status(400).json({ error: "Course not exists." });
-      }
-      console.log(response);
-      res.status(200).json({
-        success: true,
-        data: response,
-        message: "Resource fetched successfully",
-      });
-    } catch (error) {
-      console.log("Error while getting resource ");
-      console.error(error);
-      res.status(500).json({
-        success: false,
-        error: error.message,
-        message: "Internal Server Error",
-      });
+  try {
+    const { courseId } = req.params;
+
+    const response = await resourceModel.findOne({ courseId: courseId });
+    if (!response) {
+      return res.status(400).json({ error: "Course not exists." });
     }
-  };
-  
+    console.log(response);
+    res.status(200).json({
+      success: true,
+      data: response,
+      message: "Resource fetched successfully",
+    });
+  } catch (error) {
+    console.log("Error while getting resource ");
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+//UPDATE RESOURCE
+exports.updateResources = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const response = await resourceModel.findOne({ courseId: courseId });
+    if (!response) {
+      return res.status(400).json({ error: "Course not exists." });
+    }
+
+    const updatedData = await resourceModel.findOneAndUpdate(
+      { courseId: courseId },
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json({
+      success: true,
+      data: updatedData,
+      message: "Resource updated successfully",
+    });
+  } catch (error) {
+    console.log("Error while updating resource ");
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Internal Server Error",
+    });
+  }
+};
+
+//DELETE RESOURCES
+
+exports.deleteResources = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const response = await resourceModel.findOne({ courseId: courseId });
+    if (!response) {
+      return res.status(400).json({ error: "Course not exists." });
+    }
+    const deletedData = await resourceModel.findOneAndDelete({
+      courseId: courseId,
+    });
+    res.status(200).json({
+      success: true,
+      data: deletedData,
+      message: "Resource deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error while deleting resource ");
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+      message: "Internal Server Error",
+    });
+  }
+};

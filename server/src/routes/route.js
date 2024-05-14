@@ -13,6 +13,8 @@ const {
 const {
   addResources,
   getResources,
+  updateResources,
+  deleteResources,
 } = require("../controllers/resource-controller");
 
 // Auth Routes
@@ -28,6 +30,7 @@ router.get("/courses/favorites", getFavoriteCourses);
 
 //resources Routes
 router.post("/admin/resources/:courseId", addResources);
+router.put("/admin/resources/:courseId", updateResources);
+router.delete("/admin/resources/:courseId", deleteResources);
 router.get("/resources/:courseId", getResources);
-
 module.exports = router;
