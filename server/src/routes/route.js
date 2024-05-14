@@ -10,6 +10,11 @@ const {
   getFavoriteCourses,
 } = require("../controllers/course-controller");
 
+const {
+  addResources,
+  getResources,
+} = require("../controllers/resource-controller");
+
 // Auth Routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
@@ -20,4 +25,9 @@ router.get("/courses", getCourses);
 router.put("/courses/:courseId/rating", updateRating);
 router.put("/courses/:courseId/favorite", favoriteCourse);
 router.get("/courses/favorites", getFavoriteCourses);
+
+//resources Routes
+router.post("/admin/resources/:id", addResources);
+router.get("/resources/:id", getResources);
+
 module.exports = router;
