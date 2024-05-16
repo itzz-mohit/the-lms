@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchResourceApi } from "../../services/resource-api";
 
-const HtmlVideo = () => {
+const HtmlVideo = ({ courseId }) => {
+  //console.log(courseId);
+  const [video, setVideo] = useState("");
+
+  const getVideo = async () => {
+    try {
+      const response = await fetchResourceApi(courseId);
+      console.log(response);
+      console.log(response.data.video);
+      setVideo(response.data.video);
+    } catch (error) {
+      console.log("Error while getting videos");
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (courseId) {
+      getVideo();
+    }
+  }, [courseId]);
+
   return (
     <div className="bg-gray-100 flex items-center justify-center min-h-screen">
       <div className="w-full max-w-4xl aspect-video">
         <iframe
-          src="https://www.youtube.com/embed/HcOc7P5BMi4?rel=0"
+          src={video}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"

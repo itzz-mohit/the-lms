@@ -1,12 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import info from "../../assets/info.png";
 import lms from "../../assets/lms.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/authSlice";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const dispatch = useDispatch();
 
+  const handlelogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("userData");
+  };
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -24,10 +31,12 @@ const Header = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
+  const notify = () => toast("Wow so easy!");
+
   return (
     <nav className="bg-white shadow-md fixed w-full z-20 top-0 left-0 border-b">
       <div className=" flex items-center justify-between mx-auto p-4">
-        <Link to="/mainpage">
+        <Link to="/">
           <img src={lms} className="h-14" />
         </Link>
 
@@ -62,7 +71,7 @@ const Header = () => {
             {dropdownOpen && (
               <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
                 <Link
-                  to="/mainpage"
+                  to="/"
                   className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
                 >
                   Home
@@ -101,7 +110,7 @@ const Header = () => {
                   Help Desk
                 </Link>
                 <Link
-                  to="/"
+                  onClick={handlelogout}
                   className="block px-4 py-3 text-gray-800 hover:bg-gray-100 border-b border-gray-200 transition-colors duration-300"
                 >
                   Logout

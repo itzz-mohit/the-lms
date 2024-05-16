@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { loginApi } from "../../services/auth-api";
 import { useForm } from "react-hook-form";
+import { login } from "../../features/authSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     register,
@@ -18,8 +21,12 @@ const Login = () => {
     if (isValid) {
       try {
         const response = await loginApi(data);
+        //console.log(response.user);
+        const userData = response.user;
         if (response.success) {
-          navigate("/mainpage");
+          dispatch(login({ userData: userData }));
+          localStorage.setItem("userData", JSON.stringify(userData));
+          navigate("/");
           console.log("Login Successful");
           reset();
         }

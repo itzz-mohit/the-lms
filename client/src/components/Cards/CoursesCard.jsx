@@ -22,7 +22,7 @@ const CoursesCards = ({ value }) => {
 
   return (
     <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden">
-      <Link to={"/content?id=" + value.title}>
+      <Link to={"/content?id=" + value._id}>
         <img
           src={value.image}
           alt="Laptop"

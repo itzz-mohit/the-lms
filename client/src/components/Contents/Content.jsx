@@ -11,7 +11,7 @@ import HtmlAssignments from "../Assignments/HtmlAssignments";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
-  const name = searchParams.get("id");
+  const courseId = searchParams.get("id");
 
   const [toggleOne, setToggleOne] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
@@ -252,7 +252,7 @@ const Content = () => {
               />
             </svg>
           </div>
-          <div className="font-semibold text-white text-xl">{name}</div>
+          <div className="font-semibold text-white text-xl">{courseId}</div>
         </div>
         <div>
           {showHtmlPdf ? (
@@ -262,7 +262,7 @@ const Content = () => {
           ) : quiz ? (
             <QuizBanner />
           ) : showVideo ? (
-            <HtmlVideo />
+            <HtmlVideo courseId={courseId} />
           ) : showFeedback ? (
             <FeedbackForm />
           ) : showAssignments ? (
