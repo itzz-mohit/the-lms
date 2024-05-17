@@ -4,16 +4,15 @@ import pdfFile from "../../assets/pdfs/Html-Basics.pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
-
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const Pdf = () => {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1); 
+  const [pageNumber, setPageNumber] = useState(1);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
-    setPageNumber(1); 
+    setPageNumber(1);
   };
 
   const goToNextPage = () => {
@@ -30,11 +29,13 @@ const Pdf = () => {
 
   return (
     <div className="pdf-container shadow-lg flex flex-col items-center bg-gray-200 mb-11">
-      <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} />
-      </Document>
+      <div className="mt-5 ">
+        <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
+          <Page pageNumber={pageNumber} />
+        </Document>
+      </div>
 
-      <div className="mt-4 flex justify-center">
+      <div className="mt-4 flex justify-center mb-20">
         <button
           onClick={goToPrevPage}
           disabled={pageNumber <= 1}
@@ -94,4 +95,3 @@ const Pdf = () => {
 };
 
 export default Pdf;
-

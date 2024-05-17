@@ -24,8 +24,8 @@ const HtmlVideo = ({ courseId }) => {
   }, [courseId]);
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-4xl aspect-video">
+    <div className="bg-gray-100">
+      <div className="w-full  aspect-video">
         <iframe
           src={video}
           title="YouTube video player"
