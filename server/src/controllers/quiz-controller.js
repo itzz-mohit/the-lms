@@ -6,20 +6,21 @@ const courseModel = require("../models/course-model");
 exports.addQuiz = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const { question, options, answer } = req.body;
+    const { questions } = req.body;
 
     const response = await courseModel.findById({ _id: courseId });
     if (!response) {
       return res.status(400).json({ error: "Course not exists." });
     }
 
-    const quizData = await quizModel.create({
-      courseId: courseId,
-      question,
-      options,
-      answer,
-    });
+    const quizDocuments = questions.map((question) => ({
+      courseId,
+      question: question.question,
+      options: question.options,
+      answer: question.answer,
+    }));
 
+    const quizData = await quizModel.insertMany(quizDocuments);
     res.status(201).json({
       success: true,
       response: quizData,
@@ -47,7 +48,7 @@ exports.deleteQuiz = async (req, res) => {
       return res.status(400).json({ error: "Course not exists." });
     }
 
-    const deletedData = await quizModel.findOneAndDelete({
+    const deletedData = await quizModel.deleteMany({
       courseId: courseId,
     });
 
@@ -78,7 +79,7 @@ exports.getQuiz = async (req, res) => {
       return res.status(400).json({ error: "Course not exists." });
     }
 
-    const quiz = await quizModel.findOne({ courseId: courseId });
+    const quiz = await quizModel.find({ courseId: courseId });
 
     res.status(200).json({
       success: true,
@@ -100,7 +101,7 @@ exports.updateQuiz = async (req, res) => {
   try {
     const { courseId } = req.params;
 
-    const updatedQuiz = await quizModel.findOneAndUpdate(
+    const updatedQuiz = await quizModel.updateMany(
       { courseId: courseId },
       { $set: req.body },
       { new: true }
