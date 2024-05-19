@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+const { doPayment } = require("../controllers/payment-controller");
+
+router.post("/payment", doPayment);
+
 const { registerUser, loginUser } = require("../controllers/auth-controller");
 const {
   addCourses,

@@ -2,20 +2,68 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CourseRating from "../RatingBar/CourseRating";
 import { favoriteCourse } from "../../services/course-api";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const CoursesCards = ({ value }) => {
   const [isFilled, setIsFilled] = useState(value.favorite);
   const courseId = value._id;
   const totalRating = Number(value.rating);
+  const { userData } = useSelector((state) => state.auth);
+  // console.log(userData._id);
+  const userId = userData._id;
 
   const handleSvgClick = async () => {
     try {
       const response = await favoriteCourse(courseId);
-      // console.log(response);
-      // console.log(response.data);
       setIsFilled(response.data.favorite);
     } catch (error) {
-      console.clg("Error while adding to favorite");
+      console.log("Error while adding to favorite");
+      console.error(error);
+    }
+  };
+
+  const handleEnrollClick = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/payment",
+        {
+          userId: userId,
+          courseId: courseId,
+          amount: 100,
+          currency: "INR",
+          keyId: "rzp_test_YgUY0iSX1ggQSC",
+          keySecret: "iFtjontGbLgQH9glnQGEl2oU",
+        }
+      );
+
+      console.log(response);
+      // Redirect to Razorpay payment page
+      const { order_id, currency, amount } = response.data;
+      const options = {
+        key: "rzp_test_YgUY0iSX1ggQSC",
+        amount: amount,
+        currency: currency,
+        name: value.title,
+        description: value.description,
+        order_id: order_id,
+        handler: function (response) {
+          alert("Payment Successful");
+        },
+        prefill: {
+          name: "YOUR_NAME",
+          email: "YOUR_EMAIL",
+          contact: "YOUR_PHONE",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.log("Error while initiating payment");
       console.error(error);
     }
   };
@@ -63,6 +111,7 @@ const CoursesCards = ({ value }) => {
       <button
         type="button"
         className="absolute bottom-2 left-4 rounded-md bg-black px-2.5 py-1 text-[13px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        onClick={handleEnrollClick}
       >
         Enroll
       </button>
