@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CourseRating from "../RatingBar/CourseRating";
 import { favoriteCourse } from "../../services/course-api";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const CoursesCards = ({ value }) => {
+const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
   const [isFilled, setIsFilled] = useState(value.favorite);
+  const navigate = useNavigate();
   const courseId = value._id;
   const totalRating = Number(value.rating);
   const { userData } = useSelector((state) => state.auth);
@@ -49,6 +50,7 @@ const CoursesCards = ({ value }) => {
         order_id: order_id,
         handler: function (response) {
           alert("Payment Successful");
+          navigate("/");
         },
         prefill: {
           name: "YOUR_NAME",
@@ -69,14 +71,24 @@ const CoursesCards = ({ value }) => {
   };
 
   return (
-    <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden">
-      <Link to={"/content?id=" + value._id}>
-        <img
-          src={value.image}
-          alt="Laptop"
-          className="h-[200px] w-full rounded-t-md object-cover"
-        />
-      </Link>
+    <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden bg-white shadow-lg">
+      {!activeLink ? (
+        <Link to={"/"}>
+          <img
+            src={value.image}
+            alt="Laptop"
+            className="h-[200px] w-full rounded-t-md object-cover"
+          />
+        </Link>
+      ) : (
+        <Link to={"/content?id=" + value._id}>
+          <img
+            src={value.image}
+            alt="Laptop"
+            className="h-[200px] w-full rounded-t-md object-cover"
+          />
+        </Link>
+      )}
       <div className="p-5 rounded-full bg-white absolute top-2 right-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -108,13 +120,15 @@ const CoursesCards = ({ value }) => {
         </div>
       </div>
 
-      <button
-        type="button"
-        className="absolute bottom-2 left-4 rounded-md bg-black px-2.5 py-1 text-[13px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-        onClick={handleEnrollClick}
-      >
-        Enroll
-      </button>
+      {enrolledButton && (
+        <button
+          type="button"
+          className="absolute bottom-2 left-4 rounded-md bg-black px-2.5 py-1 text-[13px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          onClick={handleEnrollClick}
+        >
+          Enroll
+        </button>
+      )}
     </div>
   );
 };

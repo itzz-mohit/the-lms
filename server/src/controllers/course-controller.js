@@ -1,5 +1,6 @@
 const courseModel = require("../models/course-model");
 const cardModel = require("../models/course-model");
+const paymentModel = require("../models/payment-model");
 
 //ADD Courses
 exports.addCourses = async (req, res) => {
@@ -138,6 +139,31 @@ exports.getFavoriteCourses = async (req, res) => {
     });
   } catch (error) {
     console.error("Error while fetching the favorite course: ", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};
+
+//Get all courses of user
+
+exports.getUserDashboardCourses = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const response = await paymentModel.find({ userId: userId });
+
+    // Extract unique course IDs from payment records
+    const courseIds = [...new Set(response.map((record) => record.courseId))];
+
+    // Fetch course details for each course ID
+    const courses = await courseModel.find({ _id: { $in: courseIds } });
+
+    res.status(200).json({ data: courses });
+  } catch (error) {
+    console.error("Error while fetching the user dashboard course: ", error);
     res.status(500).json({
       success: false,
       error: "Internal Server Error",

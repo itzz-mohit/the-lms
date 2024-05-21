@@ -1,14 +1,16 @@
-import React from 'react'
-import { Dashboard, Footer, Header } from '../components'
+import React from "react";
+import { Dashboard, Footer, Header } from "../components";
+import MyChatBot from "../components/ChatBot/MyChatBot";
 
 const MainPage = () => {
   return (
     <div>
-        <Header/>
-        <Dashboard/>
-        <Footer/>
-    </div>
-  )
-}
+      <Header />
+      <Dashboard />
 
-export default MainPage
+      <MyChatBot />
+    </div>
+  );
+};
+
+export default MainPage;

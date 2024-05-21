@@ -23,7 +23,7 @@ const AllCourses = () => {
       <div className="text-3xl text-gray-400 ms-4 mt-7 py-5">All Courses</div>
       <div className="flex flex-wrap">
         {coursesList.map((course, index) => (
-          <CoursesCards value={course} key={index} />
+          <CoursesCards value={course} key={index} activeLink={false} />
         ))}
       </div>
     </div>

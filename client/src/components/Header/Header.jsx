@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import info from "../../assets/info.png";
 import lms from "../../assets/lms.png";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/authSlice";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const dispatch = useDispatch();
+
+  const userEmail = useSelector((state) => state.auth.userData?.email);
 
   const handlelogout = () => {
     dispatch(logout());
@@ -46,7 +48,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-2">
-            <p className="text-gray-600">mohitbite@gmail.com</p>
+            <p className="text-gray-600">{userEmail}</p>
           </div>
           <div className="relative" ref={dropdownRef}>
             <div

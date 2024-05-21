@@ -20,7 +20,7 @@ exports.doPayment = async (req, res) => {
   try {
     const response = await razorpay.orders.create(options);
 
-    console.log(response);
+    //console.log(response);
 
     // Save payment details to the database
     const payment = new paymentModel({

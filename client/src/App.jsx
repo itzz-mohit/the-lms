@@ -34,7 +34,7 @@ function App() {
           <LoginPage />
         </AuthLayout>
       ),
-    },
+    },  
     {
       path: "/register",
       element: (
@@ -52,7 +52,7 @@ function App() {
           element: (
             <AuthLayout authentication>
               <MainPage />
-            </AuthLayout>
+            </AuthLayout> 
           ),
         },
         {

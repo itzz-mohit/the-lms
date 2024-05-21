@@ -28,7 +28,7 @@ const FavoriteCourses = () => {
       </div>
       <div className="flex flex-wrap ms-5">
         {favoriteCourse.map((course, index) => (
-          <CoursesCards key={index} value={course} />
+          <CoursesCards key={index} value={course} enrolledButton={false} />
         ))}
       </div>
     </div>

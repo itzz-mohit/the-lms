@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { coursesList } from "../../utils/course-data";
 import Banner from "../Banners/Banner";
 import { SmallCard } from "../Cards/SmallCard";
 import CoursesCard from "../Cards/CoursesCard";
-import { courseCardApi } from "../../services/course-api";
+import { getUserDashboardCoursesApi } from "../../services/course-api";
+import { useSelector } from "react-redux";
+
 const Dashboard = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courses, setCourses] = useState([]);
+  const userId = useSelector((state) => state.auth.userData?._id);
 
-  const fetchCardData = async () => {
-    const response = await courseCardApi();
-    // console.log(response.data);
+  const fetchUserCourses = async (userId) => {
+    const response = await getUserDashboardCoursesApi(userId);
     setCourses(response.data);
     setFilteredCourses(response.data);
   };
 
   useEffect(() => {
-    fetchCardData();
+    fetchUserCourses(userId);
   }, []);
 
   const handleSearch = (query) => {
@@ -26,21 +27,25 @@ const Dashboard = () => {
     setFilteredCourses(filtered);
   };
 
-  return courses.length == 0 ? (
-    "Loading..."
-  ) : (
+  return (
     <div className="mx-8">
       <Banner onSearch={handleSearch} />
       <div className="flex flex-wrap">
-        <SmallCard />
-        <SmallCard />
+        <SmallCard name={"Other Courses"} show={false} />
+        <SmallCard name={"IT Courses"} />
       </div>
       <div className="text-2xl text-gray-400 ms-4 mt-7">Active Courses</div>
 
       <div className="flex flex-wrap ">
-        {filteredCourses.map((course, index) => (
-          <CoursesCard key={index} value={course} />
-        ))}
+        {filteredCourses.length > 0 ? (
+          filteredCourses.map((course, index) => (
+            <CoursesCard key={index} value={course} enrolledButton={false} />
+          ))
+        ) : (
+          <div className="h-50 ms-4 mt-7 text-xl text-gray-600">
+            No active courses found.
+          </div>
+        )}
       </div>
     </div>
   );

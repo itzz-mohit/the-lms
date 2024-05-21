@@ -48,3 +48,17 @@ export const getFavoriteCourses = async () => {
     console.log("Error while calling getfavoritecourses API");
   }
 };
+
+//get all the user dashboard courses
+
+export const getUserDashboardCoursesApi = async (userId) => {
+  try {
+    const response = await axios.get(`${URL}/courses/${userId}`);
+    // console.log(response);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log("Error while calling get user dashboard courses API");
+  }
+};
