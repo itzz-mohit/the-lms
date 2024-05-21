@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const { doPayment } = require("../controllers/payment-controller");
+const {
+  doPayment,
+  savePaymentData,
+} = require("../controllers/payment-controller");
 
 router.post("/payment", doPayment);
+router.post("/payment/confirm", savePaymentData);
 
 const { registerUser, loginUser } = require("../controllers/auth-controller");
 const {
@@ -13,6 +17,7 @@ const {
   favoriteCourse,
   getFavoriteCourses,
   getUserDashboardCourses,
+  getCoursesById,
 } = require("../controllers/course-controller");
 
 const {
@@ -40,6 +45,7 @@ router.put("/courses/:courseId/rating", updateRating);
 router.put("/courses/:courseId/favorite", favoriteCourse);
 router.get("/courses/favorites", getFavoriteCourses);
 router.get("/courses/:userId", getUserDashboardCourses);
+router.get("/course/:courseId", getCoursesById);
 
 // Resources Routes
 router.post("/admin/resources/:courseId", addResources);

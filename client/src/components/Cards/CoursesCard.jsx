@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
   const [isFilled, setIsFilled] = useState(value.favorite);
+  const [paymentSuccessful, setPaymentSuccessful] = useState(false);
   const navigate = useNavigate();
   const courseId = value._id;
   const totalRating = Number(value.rating);
@@ -38,7 +39,7 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
         }
       );
 
-      console.log(response);
+      // console.log(response);
       // Redirect to Razorpay payment page
       const { order_id, currency, amount } = response.data;
       const options = {
@@ -48,9 +49,21 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
         name: value.title,
         description: value.description,
         order_id: order_id,
-        handler: function (response) {
-          alert("Payment Successful");
-          navigate("/");
+        handler: async function (response) {
+          try {
+            const response = await axios.post(
+              "http://localhost:5000/api/v1/payment/confirm",
+              { userId: userId, courseId: courseId, orderId: order_id }
+            );
+            // console.log(response);
+            if (response.data.success) {
+              alert("Payment successful");
+              navigate("/");
+            }
+          } catch (error) {
+            console.log("Error while saving payment data");
+            console.error(error);
+          }
         },
         prefill: {
           name: "YOUR_NAME",

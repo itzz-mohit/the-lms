@@ -171,3 +171,20 @@ exports.getUserDashboardCourses = async (req, res) => {
     });
   }
 };
+
+//GET COURSE BY ID
+exports.getCoursesById = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+
+    const response = await courseModel.findById({ _id: courseId });
+    res.status(200).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Error while fetching the course by Id: ", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};

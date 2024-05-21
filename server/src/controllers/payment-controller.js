@@ -2,7 +2,7 @@ const Razorpay = require("razorpay");
 const paymentModel = require("../models/payment-model");
 
 exports.doPayment = async (req, res) => {
-  const { userId, courseId, amount, currency, keyId, keySecret } = req.body;
+  const { amount, currency, keyId, keySecret } = req.body;
 
   // initializing razorpay
   const razorpay = new Razorpay({
@@ -23,13 +23,13 @@ exports.doPayment = async (req, res) => {
     //console.log(response);
 
     // Save payment details to the database
-    const payment = new paymentModel({
-      userId,
-      courseId,
-      orderId: response.id,
-    });
+    // const payment = new paymentModel({
+    //   userId,
+    //   courseId,
+    //   orderId: response.id,
+    // });
 
-    await payment.save();
+    // await payment.save();
 
     res.json({
       order_id: response.id,
@@ -39,5 +39,16 @@ exports.doPayment = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(400).send("Not able to create order. Please try again!");
+  }
+};
+
+exports.savePaymentData = async (req, res) => {
+  try {
+    const { userId, courseId, orderId } = req.body;
+    const response = await paymentModel.create({ userId, courseId, orderId });
+    res.status(200).json({ success: true, data: response });
+  } catch (err) {
+    console.error(err);
+    res.status(400).send("Payment data saved");
   }
 };
