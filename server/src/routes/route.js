@@ -6,8 +6,12 @@ const {
   savePaymentData,
 } = require("../controllers/payment-controller");
 
-router.post("/payment", doPayment);
-router.post("/payment/confirm", savePaymentData);
+const { addFeedback } = require("../controllers/feedback-controller");
+
+const {
+  getValiditiesOfUser,
+  postValiditiesOfUser,
+} = require("../controllers/validity-controller");
 
 const { registerUser, loginUser } = require("../controllers/auth-controller");
 const {
@@ -58,5 +62,16 @@ router.post("/admin/quiz/:courseId", addQuiz);
 router.put("/admin/quiz/:courseId", updateQuiz);
 router.delete("/admin/quiz/:courseId", deleteQuiz);
 router.get("/quiz/:courseId", getQuiz);
+
+// Payment Routes
+router.post("/payment", doPayment);
+router.post("/payment/confirm", savePaymentData);
+
+// Feedback Routes
+router.post("/feedback/:userId", addFeedback);
+
+// Validity Routes
+router.get("/validity/:userId", getValiditiesOfUser);
+router.put("/validity/:userId", postValiditiesOfUser);
 
 module.exports = router;

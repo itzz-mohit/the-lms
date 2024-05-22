@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
   const [isFilled, setIsFilled] = useState(value.favorite);
-  const [paymentSuccessful, setPaymentSuccessful] = useState(false);
   const navigate = useNavigate();
   const courseId = value._id;
   const totalRating = Number(value.rating);
@@ -39,7 +38,7 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
         }
       );
 
-      // console.log(response);
+      console.log(response);
       // Redirect to Razorpay payment page
       const { order_id, currency, amount } = response.data;
       const options = {
@@ -78,8 +77,13 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
       const rzp1 = new window.Razorpay(options);
       rzp1.open();
     } catch (error) {
-      console.log("Error while initiating payment");
-      console.error(error);
+      if (error.response && error.response.status === 400) {
+        alert(error.response.data.message);
+        navigate("/");
+      } else {
+        console.log("Error while initiating payment");
+        console.error(error);
+      }
     }
   };
 

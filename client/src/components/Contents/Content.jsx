@@ -264,7 +264,7 @@ const Content = () => {
           ) : showVideo ? (
             <HtmlVideo courseId={courseId} />
           ) : showFeedback ? (
-            <FeedbackForm />
+            <FeedbackForm courseId={courseId} />
           ) : showAssignments ? (
             <HtmlAssignments />
           ) : (

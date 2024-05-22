@@ -1,8 +1,20 @@
 const Razorpay = require("razorpay");
 const paymentModel = require("../models/payment-model");
+const validityModel = require("../models/validity-model");
 
+// do payment
 exports.doPayment = async (req, res) => {
-  const { amount, currency, keyId, keySecret } = req.body;
+  const { amount, currency, keyId, keySecret, userId, courseId } = req.body;
+
+  const existingEnrollment = await paymentModel.findOne({ userId, courseId });
+  if (existingEnrollment) {
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "You are already enrolled in this course",
+      });
+  }
 
   // initializing razorpay
   const razorpay = new Razorpay({
@@ -42,13 +54,28 @@ exports.doPayment = async (req, res) => {
   }
 };
 
+//save payment data
 exports.savePaymentData = async (req, res) => {
   try {
     const { userId, courseId, orderId } = req.body;
     const response = await paymentModel.create({ userId, courseId, orderId });
-    res.status(200).json({ success: true, data: response });
+    // console.log(response);
+    // console.log(response.success);
+    //res.status(200).json({ success: true, data: response });
+    if (response) {
+      try {
+        const validity = await validityModel.create({ userId, courseId });
+        res
+          .status(200)
+          .json({ success: true, data: response, validityData: validity });
+      } catch (err) {
+        console.error(err);
+        res.status(400).send("Unable to set the course validity");
+      }
+    }
   } catch (err) {
     console.error(err);
-    res.status(400).send("Payment data saved");
+    res.status(400).send("Payment data not saved");
   }
 };
+
