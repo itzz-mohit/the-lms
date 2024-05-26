@@ -50,7 +50,7 @@ function App() {
         {
           path: "",
           element: (
-            <AuthLayout authentication>
+            <AuthLayout authentication> 
               <MainPage />
             </AuthLayout> 
           ),

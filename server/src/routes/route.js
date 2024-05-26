@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
+const { writeAssignmentAnswer } = require("../controllers/response-controller");
+
+const {
+  addAssignment,
+  getAssignment,
+} = require("../controllers/assignment-controller");
+
 const {
   doPayment,
   savePaymentData,
@@ -73,5 +80,12 @@ router.post("/feedback/:userId", addFeedback);
 // Validity Routes
 router.get("/validity/:userId", getValiditiesOfUser);
 router.put("/validity/:userId", postValiditiesOfUser);
+
+// Assignment Routes
+router.post("/admin/assignment/:courseId", addAssignment);
+router.get("/assignment/:courseId", getAssignment);
+
+// Response Routes
+router.post("/assignment/response/:userId", writeAssignmentAnswer);
 
 module.exports = router;

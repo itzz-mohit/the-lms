@@ -266,7 +266,7 @@ const Content = () => {
           ) : showFeedback ? (
             <FeedbackForm courseId={courseId} />
           ) : showAssignments ? (
-            <HtmlAssignments />
+            <HtmlAssignments courseId={courseId} />
           ) : (
             <Welcome />
           )}

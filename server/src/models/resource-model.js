@@ -12,7 +12,7 @@ const resourceScehma = new mongoose.Schema(
     },
     ppt: {
       type: String,
-      required: true,
+      required: true, 
     },
     video: {
       type: String,
