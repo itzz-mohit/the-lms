@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import { fetchResourceApi } from "../../services/resource-api";
 
 const HtmlVideo = ({ courseId }) => {
-  //console.log(courseId);
   const [video, setVideo] = useState("");
 
   const getVideo = async () => {
     try {
       const response = await fetchResourceApi(courseId);
-      console.log(response);
-      console.log(response.data.video);
       setVideo(response.data.video);
     } catch (error) {
       console.log("Error while getting videos");
@@ -24,8 +21,8 @@ const HtmlVideo = ({ courseId }) => {
   }, [courseId]);
 
   return (
-    <div className="bg-gray-100">
-      <div className="w-full  aspect-video">
+    
+      <div className="w-full aspect-video">
         <iframe
           src={video}
           title="YouTube video player"
@@ -33,9 +30,10 @@ const HtmlVideo = ({ courseId }) => {
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
           className="w-full h-full"
+          style={{height:'100%'}}
         ></iframe>
       </div>
-    </div>
+   
   );
 };
 

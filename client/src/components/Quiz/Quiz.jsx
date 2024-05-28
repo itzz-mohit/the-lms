@@ -46,8 +46,8 @@ const Quiz = () => {
   }, [courseId]);
 
   return (
-    <div className="min-h-screen bg-white shadow-xl">
-      <div className="flex justify-center p-6 flex-col mx-44 ">
+    <div className="h-full bg-white ">
+      <div className="flex justify-center px-6 pt-4 flex-col mx-44 ">
         {!showScore && (
           <div className="flex flex-col items-start">
             <h1 className="text-green-500">
@@ -61,8 +61,8 @@ const Quiz = () => {
         )}
         {showScore ? (
           <div className="text-center mt-10">
-            <h2 className="text-2xl font-semibold mb-4 text-slate-600">Quiz Completed</h2>
-            <p className=" mb-4">
+            <h2 className="text-4xl font-semibold mb-4 text-slate-600">Quiz Completed</h2>
+            <p className=" mb-4 text-2xl text-green-500 font-semibold">
               Your score: {score} out of {quizQuestions.length}
             </p>
           </div>

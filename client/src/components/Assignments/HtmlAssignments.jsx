@@ -77,15 +77,15 @@ export default function HtmlAssignments({ courseId }) {
     }
   };
   return (
-    <div className="bg-white shadow-lg">
+    <div className="bg-white ">
       {assignmentDone ? (
         <>
-          <div className="px-6 mt-5">
+          <div className="px-6 pt-5">
             <h1 className="text-2xl mb-4 text-slate-600">
               {assignmentQuestion}
             </h1>
           </div>
-          <div className="p-5 ">
+          <div className="px-5 ">
             <Editor
               apiKey="zpchvvwstp4brqyobhn3y9pz99tkpn13y8rhix0ndp4f6kgz"
               onInit={(_evt, editor) => (editorRef.current = editor)}
@@ -122,7 +122,7 @@ export default function HtmlAssignments({ courseId }) {
                 branding: false,
               }}
             />
-            <div className="flex items-end justify-end p-4">
+            <div className="flex items-end justify-end pt-4">
               <button
                 onClick={log}
                 className="bg-cyan-800 hover:bg-cyan-900 text-white font-semibold py-2 px-4 rounded shadow-lg hover:shadow transition duration-150 ease-in-out"
@@ -133,8 +133,8 @@ export default function HtmlAssignments({ courseId }) {
           </div>
         </>
       ) : (
-        <div className="flex justify-center mt-40 h-screen bg-white shadow-xl">
-          <h1 className="mt-3 text-2xl text-gray-500">
+        <div className="flex justify-center item-center h-full">
+          <h1 className="mt-32 text-2xl text-gray-700">
             Thank You, for submitting the assignment!!
           </h1>
         </div>

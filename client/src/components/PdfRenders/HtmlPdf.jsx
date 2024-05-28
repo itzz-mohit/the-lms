@@ -28,14 +28,14 @@ const Pdf = () => {
   };
 
   return (
-    <div className="pdf-container shadow-lg flex flex-col items-center bg-gray-200 mb-11">
-      <div className="mt-5 ">
+    <div className="pdf-container flex flex-col items-center bg-gray-200 h-full">
+      <div className="mt-5 flex-grow flex justify-center items-center">
         <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber} />
         </Document>
       </div>
 
-      <div className="mt-4 flex justify-center mb-20">
+      <div className="mt-4 flex justify-center pb-8">
         <button
           onClick={goToPrevPage}
           disabled={pageNumber <= 1}

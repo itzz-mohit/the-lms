@@ -8,8 +8,6 @@ const FeedbackForm = ({ courseId }) => {
   const userId = userData._id;
   const [message, setMessage] = useState("");
   const [feedbackDone, setFeedbackDone] = useState(false);
-  // console.log(userId);
-  // console.log(courseId);
 
   useEffect(() => {
     getInitialValidities(userId, courseId);
@@ -20,8 +18,6 @@ const FeedbackForm = ({ courseId }) => {
       const response = await axios.get(
         `http://localhost:5000/api/v1/validity/${userId}?courseId=${courseId}`
       );
-
-      //console.log(response);
 
       if (response.data.success) {
         setFeedbackDone(response.data.data.feedback);
@@ -43,17 +39,12 @@ const FeedbackForm = ({ courseId }) => {
         }
       );
 
-      //console.log(response);
       if (response.data.success) {
-        // console.log(userId);
-        // console.log(courseId);
-
         const response = await axios.put(
           `http://localhost:5000/api/v1/validity/${userId}`,
           { courseId, feedback: false }
         );
 
-        //console.log(response);
         if (response.data.success) {
           setFeedbackDone(response.data.data.feedback);
         }
@@ -65,9 +56,9 @@ const FeedbackForm = ({ courseId }) => {
   };
 
   return (
-    <div>
+    <div className="h-full flex items-center justify-center">
       {feedbackDone ? (
-        <div className="max-w-xl mx-auto mt-16 flex w-full flex-col border rounded-lg bg-white p-8">
+        <div className="max-w-xl w-full border rounded-lg bg-white p-8 shadow-lg">
           <h2 className="title-font mb-1 text-lg font-medium text-gray-900">
             Feedback 🙂
           </h2>
@@ -115,9 +106,9 @@ const FeedbackForm = ({ courseId }) => {
           </p>
         </div>
       ) : (
-        <div className="flex justify-center mt-40 h-screen bg-white shadow-xl">
-          <h1 className="mt-3 text-2xl text-gray-500">
-            Thank You, for giving feedback!!
+        <div className="flex items-center justify-center w-full h-full bg-white shadow-xl">
+          <h1 className="text-2xl text-gray-700 flex items-center justify-center">
+            Thank You for giving feedback!!
           </h1>
         </div>
       )}

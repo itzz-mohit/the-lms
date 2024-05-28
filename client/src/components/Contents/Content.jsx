@@ -87,7 +87,7 @@ const Content = () => {
   return (
     <div className="flex mx-8 mt-8 gap-6">
       {screen && (
-        <div className=" w-1/6" id="accordion ">
+        <div className=" w-1/6" id="accordion " style={{ minHeight: "100%" }}>
           <div className="flex py-2 px-2 bg-gray-400">
             <div className="me-2">
               <svg
@@ -234,7 +234,10 @@ const Content = () => {
           </div>
         </div>
       )}
-      <div className={screen ? "w-5/6" : "w-full"}>
+      <div
+        className={screen ? "w-5/6" : "w-full"}
+        style={{ minHeight: "100%" }}
+      >
         <div className="flex py-2 px-2 bg-cyan-800">
           <div className="me-2" onClick={() => setScreen(!screen)}>
             <svg
@@ -254,7 +257,7 @@ const Content = () => {
           </div>
           <div className="font-semibold text-white text-xl">{courseId}</div>
         </div>
-        <div>
+        <div className="shadow-2xl h-full" >
           {showHtmlPdf ? (
             <HtmlPdf />
           ) : showDocs ? (
