@@ -61,7 +61,9 @@ const Quiz = () => {
         )}
         {showScore ? (
           <div className="text-center mt-10">
-            <h2 className="text-4xl font-semibold mb-4 text-slate-600">Quiz Completed</h2>
+            <h2 className="text-4xl font-semibold mb-4 text-slate-600">
+              Quiz Completed
+            </h2>
             <p className=" mb-4 text-2xl text-green-500 font-semibold">
               Your score: {score} out of {quizQuestions.length}
             </p>

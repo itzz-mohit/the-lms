@@ -257,7 +257,7 @@ const Content = () => {
           </div>
           <div className="font-semibold text-white text-xl">{courseId}</div>
         </div>
-        <div className="shadow-2xl h-full" >
+        <div className="shadow-2xl h-full">
           {showHtmlPdf ? (
             <HtmlPdf />
           ) : showDocs ? (

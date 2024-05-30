@@ -9,9 +9,9 @@ const QuizBanner = () => {
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col ">
       {showQuizBanner ? (
-        <div className="flex flex-col pt-9 px-7 ">
+        <div className="flex flex-col pt-9 px-7 pb-52">
           <h1 className="text-2xl mb-4">
             You Are About To Start A Quiz: &nbsp;What You Learn?
           </h1>

@@ -106,8 +106,8 @@ const FeedbackForm = ({ courseId }) => {
           </p>
         </div>
       ) : (
-        <div className="flex items-center justify-center w-full h-full bg-white shadow-xl">
-          <h1 className="text-2xl text-gray-700 flex items-center justify-center">
+        <div className="flex items-center justify-center w-full h-full bg-white shadow-xl py-48 ">
+          <h1 className="text-3xl text-gray-700 flex items-center justify-center">
             Thank You for giving feedback!!
           </h1>
         </div>

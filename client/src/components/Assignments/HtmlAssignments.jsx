@@ -133,8 +133,8 @@ export default function HtmlAssignments({ courseId }) {
           </div>
         </>
       ) : (
-        <div className="flex justify-center item-center h-full">
-          <h1 className="mt-32 text-2xl text-gray-700">
+        <div className="flex justify-center item-center h-full py-48">
+          <h1 className=" text-3xl text-gray-700">
             Thank You, for submitting the assignment!!
           </h1>
         </div>
