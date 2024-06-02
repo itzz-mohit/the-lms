@@ -1,16 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Quiz from "../Quiz/Quiz";
+import { getValidityApi } from "../../services/validity-api";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 const QuizBanner = () => {
+  const { userData } = useSelector((state) => state.auth);
+  const userId = userData._id;
+  const [searchParams] = useSearchParams();
+  const courseId = searchParams.get("id");
   const [showQuizBanner, setShowQuizBanner] = useState(true);
+  const [quizSubmitted, setQuizSubmitted] = useState(true);
+
+  const checkValidity = async () => {
+    try {
+      const response = await getValidityApi(userId, courseId);
+      setQuizSubmitted(response.data.quiz);
+      // console.log(response);
+      // console.log(response.data.quiz);
+    } catch (error) {
+      console.log("Error while getting the validity");
+      console.error(error);
+    }
+  };
 
   const handleQuiz = () => {
     setShowQuizBanner(false);
   };
 
+  useEffect(() => {
+    if (courseId) {
+      checkValidity();
+    }
+  }, [courseId]);
+
   return (
     <div className="h-full flex flex-col ">
-      {showQuizBanner ? (
+      {!quizSubmitted ? (
+        <div className="flex items-center justify-center w-full h-full bg-white shadow-xl py-48 ">
+          <h1 className="text-3xl text-gray-700 flex items-center justify-center">
+            Quiz Already Submitted!!
+          </h1>
+        </div>
+      ) : showQuizBanner ? (
         <div className="flex flex-col pt-9 px-7 pb-52">
           <h1 className="text-2xl mb-4">
             You Are About To Start A Quiz: &nbsp;What You Learn?
