@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Welcome from "../Banners/Welcome";
 import HtmlPdf from "../PdfRenders/HtmlPdf";
 import { useSearchParams } from "react-router-dom";
@@ -9,10 +9,13 @@ import QuizBanner from "../Banners/QuizBanner";
 import FeedbackForm from "../Forms/FeedbackForm";
 import HtmlAssignments from "../Assignments/HtmlAssignments";
 import Certificate from "../Certificate/Certificate";
+import { getCoursesByIdApi } from "../../services/course-api";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
   const courseId = searchParams.get("id");
+
+  const [title, settitle] = useState('')
 
   const [toggleOne, setToggleOne] = useState(false);
   const [toggleTwo, setToggleTwo] = useState(false);
@@ -95,6 +98,23 @@ const Content = () => {
     setshowAssignments(false);
     setshowCertificate(true);
   };
+
+  const fetchCourseDetails = async () => {
+    try {
+      const response = await getCoursesByIdApi(courseId);
+      console.log(response);
+      settitle(response.data.title)
+    } catch (error) {
+      console.log("Error while getting the course detail");
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (courseId) {
+      fetchCourseDetails();
+    }
+  }, [courseId]);
 
   return (
     <div className="flex mx-8 mt-8 gap-6">
@@ -267,7 +287,7 @@ const Content = () => {
               />
             </svg>
           </div>
-          <div className="font-semibold text-white text-xl">{courseId}</div>
+          <div className="font-semibold text-white text-xl">{title}</div>
         </div>
         <div className="shadow-2xl h-full">
           {showHtmlPdf ? (

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import useSound from "use-sound";
 import clickSound from "../../assets/sounds/mouse-click.mp3";
+import { getCoursesByIdApi } from "../../services/course-api";
 
 const ContentBanner = () => {
   const [searchParams] = useSearchParams();
-  const name = searchParams.get("id");
+  const courseId = searchParams.get("id");
+  const [title, settitle] = useState('')
 
   const [play] = useSound(clickSound, { volume: 3.0 });
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +23,28 @@ const ContentBanner = () => {
     setIsOpen(false);
   };
 
+  const fetchCourseDetails = async () => {
+    try {
+      const response = await getCoursesByIdApi(courseId);
+      console.log(response);
+      settitle(response.data.title)
+    } catch (error) {
+      console.log("Error while getting the course detail");
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (courseId) {
+      fetchCourseDetails();
+    }
+  }, [courseId]);
+
   return (
     <div className="flex justify-between items-center mx-8 mt-28">
       <div className="flex items-center">
         <div>
-          <h1 className="text-lg font-semibold text-gray-800">{name}</h1>
+          <h1 className="text-lg font-semibold text-gray-800">{title}</h1>
         </div>
         <div className="relative inline-block text-left ml-4">
           <div>

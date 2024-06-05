@@ -89,3 +89,17 @@ export const getCompletedCoursesApi = async (userId) => {
     console.log("Error while calling get completed courses API");
   }
 };
+
+// get courses by id
+
+export const getCoursesByIdApi = async (courseId) => {
+  try {
+    const response = await axios.get(`${URL}/course/${courseId}`);
+    // console.log(response);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log("Error while calling get completed courses API");
+  }
+};
