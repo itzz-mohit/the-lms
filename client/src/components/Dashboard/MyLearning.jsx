@@ -49,19 +49,31 @@ const MyLearning = () => {
       <div className="text-2xl text-gray-700 mt-10">
         <h1 className="ms-6 font-semibold">In Progress Courses</h1>
       </div>
-      <div className="flex flex-wrap ms-5">
-        {coursesListProgress.map((course, index) => (
-          <CoursesCard key={index} value={course} enrolledButton={false} />
-        ))}
-      </div>
+      {coursesListProgress.length > 0 ? (
+        <div className="flex flex-wrap ms-5">
+          {coursesListProgress.map((course, index) => (
+            <CoursesCard key={index} value={course} enrolledButton={false} />
+          ))}
+        </div>
+      ) : (
+        <div className="h-50 ms-10 mt-7 pb-7 text-xl text-gray-600">
+          No progress courses found.
+        </div>
+      )}
       <div className="text-2xl text-gray-700 mt-5">
         <h1 className="ms-6 font-semibold">Completed Courses</h1>
       </div>
-      <div className="flex flex-wrap ms-5">
-        {coursesListCompleted.map((course, index) => (
-          <CoursesCard key={index} value={course} enrolledButton={false} />
-        ))}
-      </div>
+      {coursesListCompleted.length > 0 ? (
+        <div className="flex flex-wrap ms-5">
+          {coursesListCompleted.map((course, index) => (
+            <CoursesCard key={index} value={course} enrolledButton={false} />
+          ))}
+        </div>
+      ) : (
+        <div className="h-50 ms-10 mt-7 pb-7 text-xl text-gray-600">
+          No completed courses found.
+        </div>
+      )}
     </div>
   );
 };

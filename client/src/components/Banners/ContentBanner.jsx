@@ -92,7 +92,7 @@ const ContentBanner = () => {
       <div className="ml-auto">
         <div className="text-right flex">
           <div>
-            <Link to="/mainpage">
+            <Link to="/">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

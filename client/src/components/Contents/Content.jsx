@@ -8,6 +8,7 @@ import HtmlVideo from "../CourseVideo/HtmlVideo";
 import QuizBanner from "../Banners/QuizBanner";
 import FeedbackForm from "../Forms/FeedbackForm";
 import HtmlAssignments from "../Assignments/HtmlAssignments";
+import Certificate from "../Certificate/Certificate";
 
 const Content = () => {
   const [searchParams] = useSearchParams();
@@ -24,6 +25,7 @@ const Content = () => {
   const [showVideo, setShowVideo] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showAssignments, setshowAssignments] = useState(false);
+  const [showCertificate, setshowCertificate] = useState(false);
 
   const handleToggleOne = () => {
     setToggleOne(!toggleOne);
@@ -84,6 +86,16 @@ const Content = () => {
     setshowAssignments(true);
   };
 
+  const handleCertificate = () => {
+    setShowHtmlPdf(false);
+    setShowDocs(false);
+    setQuiz(false);
+    setShowVideo(false);
+    setShowFeedback(false);
+    setshowAssignments(false);
+    setshowCertificate(true);
+  };
+
   return (
     <div className="flex mx-8 mt-8 gap-6">
       {screen && (
@@ -138,12 +150,12 @@ const Content = () => {
                   >
                     Html Introduction
                   </div>
-                  <div
+                  {/* <div
                     className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
                     onClick={handleShowDocs}
                   >
                     CSS Introduction
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>
@@ -222,12 +234,12 @@ const Content = () => {
                   >
                     Feedback
                   </div>
-                  {/* <div
+                  <div
                     className="bg-gray-50 py-3 px-2 hover:bg-gray-200"
-                    onClick={handleVideo}
+                    onClick={handleCertificate}
                   >
-                    Videos
-                  </div> */}
+                    Certificate
+                  </div>
                 </div>
               )}
             </div>
@@ -270,6 +282,8 @@ const Content = () => {
             <FeedbackForm courseId={courseId} />
           ) : showAssignments ? (
             <HtmlAssignments courseId={courseId} />
+          ) : showCertificate ? (
+            <Certificate />
           ) : (
             <Welcome />
           )}
