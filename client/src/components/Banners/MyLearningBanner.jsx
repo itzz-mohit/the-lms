@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyLearningBanner = () => {
+const MyLearningBanner = ({ active, done }) => {
   return (
     <div className="mt-28 bg-gray-50 ">
       <div className=" ms-5">
@@ -14,7 +14,7 @@ const MyLearningBanner = () => {
             </div>
             <div className="py-2 ms-2">
               <div className="bg-white px-2 font-semibold rounded-md">
-                <p>3</p>
+                <p>{active + done}</p>
               </div>
             </div>
           </div>
@@ -25,25 +25,25 @@ const MyLearningBanner = () => {
           <div className="w-1/3 flex rounded-lg shadow-lg h-32 bg-white">
             <div className="py-4 px-4">
               <h3 className="text-lg text-gray-600 mb-2">Active Courses</h3>
-              <p className="text-cyan-800 font-semibold text-2xl">2</p>
+              <p className="text-cyan-800 font-semibold text-2xl">{active}</p>
             </div>
           </div>
           <div className="w-1/3 flex rounded-lg shadow-lg h-32 bg-white">
             <div className="py-4 px-4">
               <h3 className="text-lg text-gray-600 mb-2">Overdue Courses</h3>
-              <p className="text-cyan-800 font-semibold text-2xl">0</p>
+              <p className="text-cyan-800 font-semibold text-2xl">{active}</p>
             </div>
           </div>
           <div className="w-1/3 flex rounded-lg shadow-lg h-32 bg-white">
             <div className="py-4 px-4">
               <h3 className="text-lg text-gray-600 mb-2">Course Completed</h3>
-              <p className="text-cyan-800 font-semibold text-2xl">1</p>
+              <p className="text-cyan-800 font-semibold text-2xl">{done}</p>
             </div>
           </div>
           <div className="w-1/3 flex rounded-lg shadow-lg h-32 bg-white">
             <div className="py-4 px-4">
               <h3 className="text-lg text-gray-600 mb-2">Rating/Feedback</h3>
-              <p className="text-cyan-800 font-semibold text-2xl">1</p>
+              <p className="text-cyan-800 font-semibold text-2xl">{done}</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 const courseModel = require("../models/course-model");
 const cardModel = require("../models/course-model");
 const paymentModel = require("../models/payment-model");
+const validityModel = require("../models/validity-model");
 
 //ADD Courses
 exports.addCourses = async (req, res) => {
@@ -161,7 +162,7 @@ exports.getUserDashboardCourses = async (req, res) => {
     // Fetch course details for each course ID
     const courses = await courseModel.find({ _id: { $in: courseIds } });
 
-    res.status(200).json({ data: courses });
+    res.status(200).json({ data: courses, count: courses.length });
   } catch (error) {
     console.error("Error while fetching the user dashboard course: ", error);
     res.status(500).json({
@@ -181,6 +182,59 @@ exports.getCoursesById = async (req, res) => {
     res.status(200).json({ success: true, data: response });
   } catch (error) {
     console.error("Error while fetching the course by Id: ", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};
+
+// Get progress courses
+
+exports.getInProgressCourses = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const response = await validityModel.find({
+      userId: userId,
+      $or: [{ feedback: true }, { assignment: true }, { quiz: true }],
+    });
+
+    const courseIds = [...new Set(response.map((record) => record.courseId))];
+
+    const courses = await courseModel.find({ _id: { $in: courseIds } });
+
+    res.status(200).json({ data: courses, count: courses.length });
+  } catch (error) {
+    console.error("Error while fetching the in progress courses: ", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal Server Error",
+      message: error.message,
+    });
+  }
+};
+
+//get completed course
+exports.getCompletedCourses = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const response = await validityModel.find({
+      userId: userId,
+      feedback: false,
+      assignment: false,
+      quiz: false,
+    });
+
+    const courseIds = [...new Set(response.map((record) => record.courseId))];
+
+    const courses = await courseModel.find({ _id: { $in: courseIds } });
+
+    res.status(200).json({ data: courses, count: courses.length });
+  } catch (error) {
+    console.error("Error while fetching the completed courses: ", error);
     res.status(500).json({
       success: false,
       error: "Internal Server Error",

@@ -29,6 +29,8 @@ const {
   getFavoriteCourses,
   getUserDashboardCourses,
   getCoursesById,
+  getInProgressCourses,
+  getCompletedCourses,
 } = require("../controllers/course-controller");
 
 const {
@@ -57,6 +59,8 @@ router.put("/courses/:courseId/favorite", favoriteCourse);
 router.get("/courses/favorites", getFavoriteCourses);
 router.get("/courses/:userId", getUserDashboardCourses);
 router.get("/course/:courseId", getCoursesById);
+router.get("/inprogress/:userId", getInProgressCourses);
+router.get("/completed/:userId", getCompletedCourses);
 
 // Resources Routes
 router.post("/admin/resources/:courseId", addResources);

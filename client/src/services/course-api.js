@@ -62,3 +62,30 @@ export const getUserDashboardCoursesApi = async (userId) => {
     console.log("Error while calling get user dashboard courses API");
   }
 };
+
+//get in progress courses api
+export const getInProgressCoursesApi = async (userId) => {
+  try {
+    const response = await axios.get(`${URL}/inprogress/${userId}`);
+    // console.log(response);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log("Error while calling get in progress courses API");
+  }
+};
+
+// get completed courses api
+
+export const getCompletedCoursesApi = async (userId) => {
+  try {
+    const response = await axios.get(`${URL}/completed/${userId}`);
+    // console.log(response);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log("Error while calling get completed courses API");
+  }
+};
