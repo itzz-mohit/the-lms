@@ -4,8 +4,16 @@ import CourseRating from "../RatingBar/CourseRating";
 import { favoriteCourse } from "../../services/course-api";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import CardProgressBar from "../ProgressBar/CardProgressBar";
 
-const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
+const CoursesCards = ({
+  value,
+  enrolledButton = true,
+  activeLink = true,
+  validity,
+  courseCompleted,
+}) => {
+  // console.log(validity);
   const [isFilled, setIsFilled] = useState(value.favorite);
   const navigate = useNavigate();
   const courseId = value._id;
@@ -87,6 +95,19 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
     }
   };
 
+  const calculateProgress = (validity) => {
+    if (!validity) return 0;
+    const totalTasks = 3;
+    const completedTasks = [
+      validity.quiz,
+      validity.assignment,
+      validity.feedback,
+    ].filter((value) => value == false).length;
+    return Math.round((completedTasks / totalTasks) * 100);
+  };
+
+  const progressPercent = calculateProgress(validity);
+
   return (
     <div className="w-full md:w-[330px] h-[380px] rounded-md border my-7 mx-4 relative overflow-hidden bg-white shadow-lg">
       {!activeLink ? (
@@ -137,7 +158,7 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
         </div>
       </div>
 
-      {enrolledButton && (
+      {enrolledButton ? (
         <button
           type="button"
           className="absolute bottom-2 left-4 rounded-md bg-black px-2.5 py-1 text-[13px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -145,6 +166,11 @@ const CoursesCards = ({ value, enrolledButton = true, activeLink = true }) => {
         >
           Enroll
         </button>
+      ) : (
+        <CardProgressBar
+          percent={progressPercent}
+          courseCompleted={courseCompleted}
+        />
       )}
     </div>
   );

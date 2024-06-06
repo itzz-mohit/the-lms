@@ -8,10 +8,13 @@ import { useSelector } from "react-redux";
 const Dashboard = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [courses, setCourses] = useState([]);
+  const [validities, setValidities] = useState([]);
   const userId = useSelector((state) => state.auth.userData?._id);
 
   const fetchUserCourses = async (userId) => {
     const response = await getUserDashboardCoursesApi(userId);
+    // console.log(response);
+    setValidities(response.validities);
     setCourses(response.data);
     setFilteredCourses(response.data);
   };
@@ -27,6 +30,12 @@ const Dashboard = () => {
     setFilteredCourses(filtered);
   };
 
+  const findValidity = (courseId) => {
+    return validities.find(
+      (v) => v.courseId.toString() === courseId.toString()
+    );
+  };
+
   return (
     <div className="mx-8">
       <Banner onSearch={handleSearch} />
@@ -36,11 +45,19 @@ const Dashboard = () => {
       </div>
       <div className="text-2xl text-gray-400 ms-4 mt-7">Active Courses</div>
 
-      <div className="flex flex-wrap ">
+      <div className="flex flex-wrap">
         {filteredCourses.length > 0 ? (
-          filteredCourses.map((course, index) => (
-            <CoursesCard key={index} value={course} enrolledButton={false} />
-          ))
+          filteredCourses.map((course, index) => {
+            const validity = findValidity(course._id);
+            return (
+              <CoursesCard
+                key={index}
+                value={course}
+                enrolledButton={false}
+                validity={validity}
+              />
+            );
+          })
         ) : (
           <div className="h-50 ms-4 mt-7 text-xl text-gray-600">
             No active courses found.

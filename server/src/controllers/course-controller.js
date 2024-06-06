@@ -162,7 +162,17 @@ exports.getUserDashboardCourses = async (req, res) => {
     // Fetch course details for each course ID
     const courses = await courseModel.find({ _id: { $in: courseIds } });
 
-    res.status(200).json({ data: courses, count: courses.length });
+    // Fetch all the validities for the progress bar
+    const validity = await validityModel.find({
+      userId: userId,
+      courseId: { $in: courseIds },
+    });
+
+    // console.log(validity);
+
+    res
+      .status(200)
+      .json({ data: courses, count: courses.length, validities: validity });
   } catch (error) {
     console.error("Error while fetching the user dashboard course: ", error);
     res.status(500).json({
@@ -205,7 +215,15 @@ exports.getInProgressCourses = async (req, res) => {
 
     const courses = await courseModel.find({ _id: { $in: courseIds } });
 
-    res.status(200).json({ data: courses, count: courses.length });
+    // Fetch all the validities for the progress bar
+    const validity = await validityModel.find({
+      userId: userId,
+      courseId: { $in: courseIds },
+    });
+
+    res
+      .status(200)
+      .json({ data: courses, count: courses.length, validities: validity });
   } catch (error) {
     console.error("Error while fetching the in progress courses: ", error);
     res.status(500).json({
@@ -232,7 +250,15 @@ exports.getCompletedCourses = async (req, res) => {
 
     const courses = await courseModel.find({ _id: { $in: courseIds } });
 
-    res.status(200).json({ data: courses, count: courses.length });
+    // Fetch all the validities for the progress bar
+    const validity = await validityModel.find({
+      userId: userId,
+      courseId: { $in: courseIds },
+    });
+
+    res
+      .status(200)
+      .json({ data: courses, count: courses.length, validities: validity });
   } catch (error) {
     console.error("Error while fetching the completed courses: ", error);
     res.status(500).json({
