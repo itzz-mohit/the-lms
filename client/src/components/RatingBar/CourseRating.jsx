@@ -11,7 +11,6 @@ function CourseRating({ intialrating, courseId }) {
       const response = await updateCourseRating(courseId, { rating: data });
       console.log(response);
       setRating(data);
-      //window.location.reload();
     } catch (error) {
       console.log(error);
       console.log("Failed to change the rating");

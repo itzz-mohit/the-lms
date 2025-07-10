@@ -8,12 +8,12 @@ const teamMembers = [
     imageUrl: "https://i.imgur.com/WbQnbas.png",
     bio: "Mohit Kumar is the lead developer at Our Website, bringing innovative solutions to our digital platform.",
   },
-  {
-    name: "Avneet Kaur",
-    role: "Lead Developer",
-    imageUrl: "https://i.imgur.com/WbQnbas.png",
-    bio: "Avneet Kaur is a skilled developer who contributes to the technical backbone of Our Website.",
-  },
+  // {
+  //   name: "Avneet Kaur",
+  //   role: "Lead Developer",
+  //   imageUrl: "https://i.imgur.com/WbQnbas.png",
+  //   bio: "Avneet Kaur is a skilled developer who contributes to the technical backbone of Our Website.",
+  // },
 ];
 
 const features = [
